@@ -1,0 +1,14 @@
+<div *ngIf="filterType === 'clubmembers' || filterType === 'unassignedfighters'" class="row">
+    <mat-form-field class="col-6">
+        <input type="text" matInput placeholder="Enter your query" (keyup)="searchFieldValueChanged($event)">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="col-6">
+        <mat-label>Search by</mat-label>
+        <mat-select (selectionChange)="selectedSearchIndexChanged($event)" [value]="selectedSearchIndex">
+          <mat-option *ngFor="let index of clubMembersSearchIndexes" [value]="index" >
+            {{index}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

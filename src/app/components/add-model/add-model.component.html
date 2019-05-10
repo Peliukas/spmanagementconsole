@@ -1,0 +1,77 @@
+<mat-card>
+  <mat-card-title>
+    <div>{{modelName}}</div>
+  </mat-card-title>
+  <mat-card-content>
+      <div class="fightclub-form-field-container row" *ngIf="modelName === 'fightclub'" [formGroup]="fightclubFormGroup">
+        <div class="col-6">
+            <img class="w-100" alt="" src="{{profileImageUrl ? profileImageUrl : config.fightclubImagePlaceholderUrl}}">
+            <image-upload (uploadFinished)="profileImageChanged($event)"
+                          [preview]="false"
+                          [max]="1"></image-upload>
+        </div>
+        <div class="col-6">
+            <mat-form-field>
+                <input type="text" matInput placeholder="Name" formControlName="name">
+            </mat-form-field>
+            <mat-form-field>
+              <input type="text" matInput placeholder="City" formControlName="city">
+            </mat-form-field>
+            <mat-form-field>
+              <input type="text" matInput placeholder="Address" formControlName="address">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Website" formControlName="website">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Contact email" formControlName="email">
+              </mat-form-field>
+            <mat-form-field>
+                  <input type="text" matInput placeholder="Contact phone" formControlName="phone">
+            </mat-form-field>    
+            <div>
+              <button mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Add'}} {{modelName}}</button>
+            </div>
+        </div>
+        <div class="col-12 mt-4" *ngIf="modelId">
+          <app-club-members [clubId]="modelId"></app-club-members>
+        </div>
+      </div>
+      <div class="fighter-form-field-container" *ngIf="modelName === 'fighter'" [formGroup]="fighterFormGroup">
+        <div class="row">
+            <div class="col-4 mt-4">
+                <img class="w-100" alt="" src="{{profileImageUrl ? profileImageUrl : config.profileImagePlaceholderUrl}}">
+                <image-upload (uploadFinished)="profileImageChanged($event)"
+                              [preview]="false"
+                              [max]="1"></image-upload>
+            </div>
+            <div class="col-8">
+                <mat-form-field>
+                    <input type="text" matInput placeholder="First Name" formControlName="firstname">
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Last Name" formControlName="lastname">
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="number" matInput placeholder="Weight" formControlName="weight">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Height" formControlName="height">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="date" matInput placeholder="Date of birth" formControlName="birthdate">
+                  </mat-form-field>
+                <mat-form-field>
+                      <mat-select placeholder="Gender" formControlName="gender">
+                        <mat-option value="Male">Male</mat-option>
+                        <mat-option value="Female">Female</mat-option>
+                      </mat-select>
+                </mat-form-field>
+                <div>
+                    <button class="float-right" mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Add'}} {{modelName}}</button>
+                </div>
+            </div>
+        </div>
+      </div>
+  </mat-card-content>
+</mat-card>

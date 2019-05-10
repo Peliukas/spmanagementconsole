@@ -1,0 +1,66 @@
+<h3 mat-dialog-title>Add new club members</h3>
+<div class="row pb-3">
+  <div class="col-12">
+      <app-result-filter [filterType]="'unassignedfighters'"></app-result-filter>
+    </div>
+    <div *ngIf="unassignedFighters.length < 1" class="col-12">
+      <h4 class="text-center no-result-text">There are no unassigned fighters in a system</h4>
+    </div>
+      <div *ngFor="let fighter of unassignedFighters" class="col-3">
+          <mat-card>
+            <mat-card-content>
+              <div class="row">
+                <div class="col-12">
+                    <img class="w-100 fighter-image" src="{{config.storageUrl + fighter.image}}">	
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="row">
+                <div class="col-12 mt-2">
+                    <h5>{{fighter.firstname}} {{fighter.lastname}}</h5>
+                </div>
+                <div class="col-8">
+                  <div>
+                    <span>Weight: </span>
+                    <strong>{{fighter.weight}}</strong>
+                  </div>
+                  <div>
+                    <span>Height: </span>
+                    <strong>{{fighter.height}}</strong>
+                  </div>
+                  <div>
+                    <span>Age: </span>
+                    <strong>{{fighter.birthdate | ageConverter}}</strong>
+                  </div>
+                </div>
+                <div class="col-4">
+      
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-footer class="d-flex justify-content-between mat-card-footer">
+              <mat-divider></mat-divider>
+              <div class="w-50">
+                  <button mat-button class="w-100" (click)="fighterSelectionClicked(fighter.id)">
+                    <mat-icon *ngIf="!selectedUnassignedFighters.includes(fighter.id)" class="text-green">check</mat-icon>
+                    <mat-icon *ngIf="selectedUnassignedFighters.includes(fighter.id)" class="text-red">close</mat-icon>
+                  </button>
+                </div>
+                <div class="w-50">
+                  <button mat-button class="w-100">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                </div>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div mat-dialog-actions class="d-flex justify-content-between">
+    <span>
+        Selected: {{totalSelected}}
+    </span>
+    <button mat-button [disabled]="totalSelected === 0" class="float-right" (click)="saveSelected()">
+        <mat-icon>save</mat-icon> Save selected
+    </button>
+  </div>

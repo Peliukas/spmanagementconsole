@@ -1,0 +1,50 @@
+<h4>Club Members</h4>
+<div class="d-flex justify-content-between">
+    <app-result-filter [filterType]="'clubmembers'" [params]="{'clubId' : clubId}" (filteredResults)="memberListChanged($event)"></app-result-filter>
+    <button mat-button>
+        <mat-icon (click)="addNewMembers()">group_add</mat-icon>
+      </button>
+</div>
+<mat-divider></mat-divider>
+<div class="row pt-3" *ngIf="memberList">
+  <div *ngFor="let member of memberList" class="col-md-3 col-lg-2" [routerLink]="['/edit/fighter/' + member.id]">
+        <mat-card>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-12">
+                  <img class="w-100 fighter-image" src="{{config.storageUrl + member.image}}">	
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row">
+              <div class="col-12 mt-4">
+                  <h6>{{member.firstname}} {{member.lastname}}</h6>
+              </div>
+              <div class="col-8">
+                <div>
+                  <span>Weight: </span>
+                  <strong>{{member.weight}}</strong>
+                </div>
+                <div>
+                  <span>Height: </span>
+                  <strong>{{member.height}}</strong>
+                </div>
+                <div>
+                  <span>Age: </span>
+                  <strong>{{member.birthdate | ageConverter}}</strong>
+                </div>
+              </div>
+              <div class="col-4">
+    
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+<div *ngIf="memberList && memberList.length < 1" class="mt-5 mb-5">
+  <h4 class="text-center no-result-text">No results matching your criteria</h4>
+</div>
+<div *ngIf="!memberList" class="mt-5 mb-5">
+  <h4 class="text-center no-result-text">The club has no members yet</h4>
+</div>

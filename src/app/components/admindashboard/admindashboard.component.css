@@ -1,0 +1,25 @@
+.site-logo{
+    width: 55px;
+}
+
+.nav-menu-container{
+    box-shadow: 1px 0px 8px 1px lightgrey;
+}
+
+#user-profile-image{
+    height: 30px;
+    float: right;
+}
+
+.nav-menu{
+    list-style: none;
+}
+
+.nav-menu li{    
+    color: #1e75bd;
+    margin-top: 20px;
+    padding: 5px;
+    font-weight: 300;
+    font-size: smaller;
+    text-transform: uppercase;
+}

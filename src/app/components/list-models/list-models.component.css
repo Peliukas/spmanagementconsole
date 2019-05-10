@@ -1,0 +1,12 @@
+mat-list-item{
+    border-bottom: solid 1px #d3d3d361;
+}
+
+.fighter-avatar-image{
+    width: 100%;
+    height: auto;
+}
+
+mat-list-item{
+    height: 120px!important;
+}

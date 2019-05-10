@@ -1,0 +1,11 @@
+mat-card-title{
+    text-transform: capitalize;
+}
+
+.fightclub-form-field-container mat-form-field,.fighter-form-field-container mat-form-field{
+    width: 100%;
+}
+
+.fighter-profile-image{
+    width: 100%;
+}

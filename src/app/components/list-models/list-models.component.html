@@ -1,0 +1,94 @@
+<mat-card class="w-100" dense>
+  <mat-card-title>
+    <div>{{modelName}}</div>
+  </mat-card-title>
+  <mat-card-content>
+      <div class="align-content-center d-flex justify-content-between">
+        <div>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Search for {{modelName}}" (keyup)="searchForModel($event.target.value)">
+          </mat-form-field>
+        </div>
+        <div class="pr-1">
+          <button mat-raised-button routerLink="/add/{{modelName}}">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div *ngIf="modelList.length === 0" >
+        <mat-spinner class="ml-auto mr-auto mt-5 mb-5"></mat-spinner>
+      </div>
+      <mat-list role="list">
+          <mat-list-item *ngFor="let model of modelList">
+            <div class="container p-0" *ngIf="modelName === 'fightclub'">
+                <div class="row">
+                  <div class="col-3 pt-2">
+                      <small>
+                        {{model.name}}
+                      </small>
+                  </div>
+                  <div class="col-3 pt-2">
+                      <small>
+                        {{model.city}}
+                      </small>
+                  </div>
+                  <div class="col-3 pt-2">
+                      <small>
+                          {{model.address}}
+                      </small>
+                  </div>
+                  <div class="col-3 pr-1">
+                      <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                  </div>
+                </div>
+            </div>
+            <div class="container p-0" *ngIf="modelName === 'fighter'">
+                <div class="row">
+                  <div class="col-2  m-auto">
+                    <img class="fighter-avatar-image" src="{{model.image ? config.storageUrl + model.image : config.profileImagePlaceholderUrl}}" alt="">
+                  </div>
+                  <div class="col-8 pt-2">
+                      <div class="row">
+                        <div class="col-12">
+                            <strong>
+                              {{model.firstname}}
+                              {{model.lastname}}
+                            </strong>
+                          </div>
+                          <div class="col-2 pt-2">
+                              <small>
+                                  {{model.birthdate}}
+                              </small>
+                          </div>
+                          <div class="col-2 pt-2">
+                              <small>
+                                  {{model.weight}}
+                              </small>
+                          </div>
+                          <div class="col-2 pt-2">
+                              <small>
+                                  {{model.height}}
+                              </small>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-2 pr-1 d-flex justify-content-end pt-3">
+                      <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+              </div>
+          </mat-list-item>
+        </mat-list>
+  </mat-card-content>
+</mat-card>
