@@ -1,9 +1,11 @@
-import {Input, Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiConfig } from 'src/app/api-config';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { CreateFightComponent } from '../create-fight/create-fight.component';
 
 @Component({
   selector: 'app-add-model',
@@ -20,6 +22,7 @@ export class AddModelComponent implements OnInit {
   modelId: any;
   profileImage: any;
   profileImageUrl: any;
+  fightList: any = [];
   fightclubFormGroup = new FormGroup({
     name: new FormControl(''),
     city: new FormControl(''),
@@ -27,6 +30,7 @@ export class AddModelComponent implements OnInit {
     website: new FormControl(''),
     email: new FormControl(''),
     phone: new FormControl(''),
+    image: new FormControl('')
   });
   fighterFormGroup = new FormGroup({
     firstname: new FormControl(''),
@@ -36,7 +40,17 @@ export class AddModelComponent implements OnInit {
     fightclubid: new FormControl(''),
     birthdate: new FormControl(''),
     gender: new FormControl(''),
-    image: new FormControl(''),
+    image: new FormControl('')
+  });
+  tournamentFormGroup = new FormGroup({
+    name: new FormControl(''),
+    startdate: new FormControl(''),
+    enddate: new FormControl(''),
+    city: new FormControl(''),
+    address: new FormControl(''),
+    description: new FormControl(''),
+    gender: new FormControl(''),
+    image: new FormControl('')
   });
   httpOptions = {
     headers: new HttpHeaders({
@@ -44,7 +58,11 @@ export class AddModelComponent implements OnInit {
     })
   };
 
-  constructor(private http:HttpClient, private config: ApiConfig, private route: ActivatedRoute, private router: Router) { }
+  constructor(private http:HttpClient, 
+    private config: ApiConfig, 
+    private route: ActivatedRoute, 
+    private router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit() {  
     this.route.params.subscribe(params => {
@@ -107,7 +125,11 @@ export class AddModelComponent implements OnInit {
         delete this.modelData['id'];
         switch(this.modelName){
           case "fightclub":
+          if(this.modelData['image']){
             this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
+          }else{
+            this.profileImageUrl = '';
+          }  
             this.fightclubFormGroup.setValue(this.modelData);
           break;
           case "fighter":
@@ -130,5 +152,16 @@ export class AddModelComponent implements OnInit {
     return this.http.post(this.config.apiUrl + this.modelName + "/image/" + this.modelId, input);
   }
 
+  createFight(){
+    const dialogRef = this.dialog.open(CreateFightComponent, {
+      width: '60vw',
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.fightList.push(result);
+      }
+    });
+  }
 
 }

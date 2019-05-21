@@ -16,8 +16,11 @@
         </div>
       </div>
       <mat-divider></mat-divider>
-      <div *ngIf="modelList.length === 0" >
+      <div *ngIf="!modelList" >
         <mat-spinner class="ml-auto mr-auto mt-5 mb-5"></mat-spinner>
+      </div>
+      <div *ngIf="modelList && modelList.length === 0" >
+        <h5 class="no-result-text text-center mt-5 mb-4">There are no {{modelName}}s created yet</h5>
       </div>
       <mat-list role="list">
           <mat-list-item *ngFor="let model of modelList">
@@ -74,6 +77,42 @@
                           <div class="col-2 pt-2">
                               <small>
                                   {{model.height}}
+                              </small>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-2 pr-1 d-flex justify-content-end pt-3">
+                      <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+              </div>
+            <div class="container p-0" *ngIf="modelName === 'tournament'">
+                <div class="row">
+                  <div class="col-10 pt-2">
+                      <div class="row">
+                        <div class="col-12">
+                            <strong>
+                              {{model.name}}
+                            </strong>
+                          </div>
+                          <div class="col-2 pt-2">
+                              <small>
+                                  {{model.startdate}}
+                              </small>
+                          </div>
+                          <div class="col-2 pt-2">
+                              <small>
+                                  {{model.enddate}}
+                              </small>
+                          </div>
+                          <div class="col-2 pt-2">
+                              <small>
+                                  {{model.city}}
                               </small>
                           </div>
                         </div>

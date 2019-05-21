@@ -1,0 +1,45 @@
+<mat-card class="fighter-card">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-12">
+          <img class="w-100 fighter-image" src="{{config.storageUrl + fighter.image}}">	
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mt-2">
+          <h5>{{fighter.firstname}} {{fighter.lastname}}</h5>
+      </div>
+      <div class="col-8">
+        <div>
+          <span>Weight: </span>
+          <strong>{{fighter.weight}}</strong>
+        </div>
+        <div>
+          <span>Height: </span>
+          <strong>{{fighter.height}}</strong>
+        </div>
+        <div>
+          <span>Age: </span>
+          <strong>{{fighter.birthdate | ageConverter}}</strong>
+        </div>
+      </div>
+      <div class="col-4">
+
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-footer class="d-flex justify-content-between mat-card-footer" *ngIf="selectable">
+    <mat-divider></mat-divider>
+    <div class="w-100">
+        <button mat-button class="w-100" (click)="fighterSelectionClicked()">
+          <mat-icon class="text-green" *ngIf="!fighterHighlighted">check</mat-icon>
+          <mat-icon class="text-red" *ngIf="fighterHighlighted">close</mat-icon>
+        </button>
+    </div>
+    <!-- <div class="w-50">
+      <button mat-button class="w-100">
+        <mat-icon>visibility</mat-icon>
+      </button>
+    </div> -->
+  </mat-card-footer>
+</mat-card>

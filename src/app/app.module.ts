@@ -6,8 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule, MatSelectModule, MatSnackBarModule, 
         MatTabsModule, MatFormFieldModule, MatInputModule, 
         MatButtonModule, MatListModule, MatIconModule,
-        MatDialogModule, MatProgressSpinnerModule,
-        MatDialog} from '@angular/material';
+        MatDialogModule, MatProgressSpinnerModule, MatNativeDateModule, 
+        MatDatepickerModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component';
@@ -20,6 +20,10 @@ import { ClubMembersComponent } from './components/club-members/club-members.com
 import { AgeConverterPipe } from './pipes/age-converter.pipe';
 import { UnassignedFighterListComponent } from './components/unassigned-fighter-list/unassigned-fighter-list.component';
 import { ResultFilterComponent } from './components/result-filter/result-filter.component';
+import { CreateFightComponent } from './components/create-fight/create-fight.component';
+import { FighterCardComponent } from './components/fighter-card/fighter-card.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+ 
 
 
 const appRoutes: Routes = [
@@ -48,19 +52,23 @@ const appRoutes: Routes = [
     AgeConverterPipe,
     UnassignedFighterListComponent,
     ResultFilterComponent,
+    CreateFightComponent,
+    FighterCardComponent,
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
     ),
     ImageUploadModule.forRoot(),
-    ReactiveFormsModule, HttpClientModule, RouterModule, MatProgressSpinnerModule,
+    ReactiveFormsModule, HttpClientModule, RouterModule, 
+    NgScrollbarModule, MatProgressSpinnerModule,
     BrowserModule, BrowserAnimationsModule, MatCardModule, MatTabsModule,
      MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule,
-     MatIconModule, MatSnackBarModule, MatSelectModule, MatDialogModule
+     MatIconModule, MatSnackBarModule, MatSelectModule, MatDialogModule,
+     MatDatepickerModule, MatNativeDateModule
   ],
   providers: [ApiConfig],
   bootstrap: [AppComponent],
-  entryComponents: [UnassignedFighterListComponent],
+  entryComponents: [UnassignedFighterListComponent, CreateFightComponent],
 })
 export class AppModule { }

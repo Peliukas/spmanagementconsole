@@ -1,0 +1,16 @@
+.add-contestant-button{
+    height: 20vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.versus-text{
+    text-align: center;
+    margin-top: 8vh;
+    font-size: xx-large;
+}
+
+.fightclub-member-container{
+    height: 30vh;
+}

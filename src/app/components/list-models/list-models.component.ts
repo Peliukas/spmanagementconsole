@@ -13,7 +13,7 @@ export class ListModelsComponent implements OnInit {
 
 
   modelName: string;
-  modelList = [];
+  modelList: any[];
 
   constructor(private http:HttpClient, 
               private config: ApiConfig, 
@@ -28,11 +28,13 @@ export class ListModelsComponent implements OnInit {
   }
 
   getModelList(){
-    this.modelList = [];
     this.http.get(this.config.apiUrl + this.modelName)
     .subscribe(res => {
-      for(let singleres in res){
-        this.modelList.push(res[singleres]);
+      if(res){
+        this.modelList = [];
+        for(let singleres in res){
+          this.modelList.push(res[singleres]);
+        }
       }
     });
   }

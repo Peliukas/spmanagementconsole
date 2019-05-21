@@ -2,10 +2,19 @@ mat-card-title{
     text-transform: capitalize;
 }
 
-.fightclub-form-field-container mat-form-field,.fighter-form-field-container mat-form-field{
+.fightclub-form-field-container mat-form-field,
+.fighter-form-field-container mat-form-field{
     width: 100%;
 }
 
 .fighter-profile-image{
     width: 100%;
+}
+
+/* .fight-contestant-card-container{
+    height: 60px;
+} */
+
+.red-fight-contestant-card img, .blue-fight-contestant-card img{
+    width: 50%;
 }
