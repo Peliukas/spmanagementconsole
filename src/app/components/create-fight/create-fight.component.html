@@ -54,7 +54,7 @@
         <h4 *ngIf="selectingBlueContestant">Blue</h4>
       </div> -->
       <mat-form-field class="col-12">
-        <mat-select [value]="fightclubList[0].id" (selectionChange)="clubFilterChanged($event)" placeholder="Filter fighters by fightclub">
+        <mat-select [(value)]="selectedClubId" (selectionChange)="clubFilterChanged($event)" placeholder="Filter fighters by fightclub">
           <mat-option *ngFor="let fightclub of fightclubList" [value]="fightclub.id">
             {{fightclub.name}}
           </mat-option>
@@ -65,9 +65,9 @@
   <ng-scrollbar>
     <div class="container">
         <div class="fightclub-member-container row">
-          <div *ngFor="let fighter of fightclubMembers" class="col-4 mt-1"
-          [class.mat-elevation-z10]="(this.redContestant && this.redContestant.id || this.blueContestant && this.blueContestant.id) === fighter.id">
-            <app-fighter-card [fighter]="fighter" (click)="setSelectedFighter(fighter.id)"></app-fighter-card>   
+          <div *ngFor="let fighter of fightclubMembers" class="col-lg-3 col-md-4 mt-1">
+            <app-fighter-card [fighter]="fighter" (click)="setSelectedFighter(fighter.id)"
+            [selected]="(this.redContestant && this.redContestant.id === fighter.id || this.blueContestant && this.blueContestant.id  === fighter.id)"></app-fighter-card>   
           </div>
       </div>
     </div>

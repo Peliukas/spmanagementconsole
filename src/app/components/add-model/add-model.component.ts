@@ -48,9 +48,7 @@ export class AddModelComponent implements OnInit {
     enddate: new FormControl(''),
     city: new FormControl(''),
     address: new FormControl(''),
-    description: new FormControl(''),
-    gender: new FormControl(''),
-    image: new FormControl('')
+    description: new FormControl('')
   });
   httpOptions = {
     headers: new HttpHeaders({
@@ -83,23 +81,49 @@ export class AddModelComponent implements OnInit {
       case "fighter":
       controlName = this.fighterFormGroup;
       break;
+      case "tournament":
+      controlName = this.tournamentFormGroup;
+      break;
     }
     if(!this.modelId){
       //add new model
-      this.http.post(this.config.apiUrl + this.modelName, controlName.getRawValue(), this.httpOptions)
-      .subscribe(res => {
-        if(res > 0){
-          if(this.profileImage){
-            this.modelId = res;
-            this.uploadImage()
-            .subscribe( uploadRes => {
+      switch(this.modelName){
+        case "fightclub":
+        case "fighter":
+          this.http.post(this.config.apiUrl + this.modelName, controlName.getRawValue(), this.httpOptions)
+          .subscribe(res => {
+            if(res > 0){
+              if(this.profileImage){
+                this.modelId = res;
+                this.uploadImage()
+                .subscribe( uploadRes => {
+                  this.router.navigate(['/list', this.modelName]);
+                });
+              }else{
+                this.router.navigate(['/list', this.modelName]);
+              }
+            }
+          });
+        break;
+        case "tournament":
+        let tournamentData: any = controlName.getRawValue();
+        tournamentData.tournament_fights = this.fightList;
+        this.http.post(this.config.apiUrl + this.modelName, tournamentData, this.httpOptions)
+        .subscribe(res => {
+          if(res > 0){
+            if(this.profileImage){
+              this.modelId = res;
+              this.uploadImage()
+              .subscribe( uploadRes => {
+                this.router.navigate(['/list', this.modelName]);
+              });
+            }else{
               this.router.navigate(['/list', this.modelName]);
-            });
-          }else{
-            this.router.navigate(['/list', this.modelName]);
+            }
           }
-        }
-      });
+        });
+        break;
+      }
     }else{
       //update model
       this.http.post(this.config.apiUrl + "update/" + this.modelName + "/" + this.modelId, controlName.getRawValue(), this.httpOptions)
@@ -160,6 +184,7 @@ export class AddModelComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result){
         this.fightList.push(result);
+        console.log(this.fightList);
       }
     });
   }

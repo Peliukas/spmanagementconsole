@@ -43,7 +43,6 @@ export class CreateFightComponent implements OnInit {
   chooseContestant(color: string){
     if(this.fightclubList && this.fightclubList.length > 0){
       this.selectedClubId = this.fightclubList[0].id;
-      this.getFightclubs();
     }
     this.displayContestantSelection = true;
     this.getFightclubs();
@@ -63,8 +62,10 @@ export class CreateFightComponent implements OnInit {
       for(let index in res){
         this.fightclubList.push(res[index]);
       }
-      if(this.fightclubList.length > 0){
+      if(this.fightclubList.length > 0 && !this.fightclubMembers){
         this.selectedClubId = this.fightclubList[0].id;
+        this.getFightContestantCandidates();
+      }else if(this.fightclubList.length > 0 && this.fightclubMembers.length > 0){
         this.getFightContestantCandidates();
       }
     });
