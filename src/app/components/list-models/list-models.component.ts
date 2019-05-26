@@ -31,10 +31,11 @@ export class ListModelsComponent implements OnInit {
     this.http.get(this.config.apiUrl + this.modelName)
     .subscribe(res => {
       if(res){
-        this.modelList = [];
+        let templist = [];
         for(let singleres in res){
-          this.modelList.push(res[singleres]);
+          templist.push(res[singleres]);
         }
+        this.modelList = templist;
       }
     });
   }

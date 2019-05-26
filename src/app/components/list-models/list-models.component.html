@@ -1,6 +1,6 @@
 <mat-card class="w-100" dense>
   <mat-card-title>
-    <div>{{modelName}}</div>
+    <div class="text-capitalize">{{modelName}} management</div>
   </mat-card-title>
   <mat-card-content>
       <div class="align-content-center d-flex justify-content-between">
@@ -19,115 +19,116 @@
       <div *ngIf="!modelList" >
         <mat-spinner class="ml-auto mr-auto mt-5 mb-5"></mat-spinner>
       </div>
-      <div *ngIf="modelList && modelList.length === 0" >
+      <div *ngIf="modelList && modelList.length === 0" class="no-list-items-message-container">
         <h5 class="no-result-text text-center mt-5 mb-4">There are no {{modelName}}s created yet</h5>
       </div>
-      <mat-list role="list">
-          <mat-list-item *ngFor="let model of modelList">
-            <div class="container p-0" *ngIf="modelName === 'fightclub'">
-                <div class="row">
-                  <div class="col-3 pt-2">
-                      <small>
-                        {{model.name}}
-                      </small>
+      <ng-scrollbar>
+        <mat-list role="list" class="m-2">
+            <mat-list-item *ngFor="let model of modelList" class="m-1">
+              <div class="container p-0" *ngIf="modelName === 'fightclub'">
+                  <div class="row">
+                    <div class="col-3 pt-2">
+                        <small>
+                          {{model.name}}
+                        </small>
+                    </div>
+                    <div class="col-3 pt-2">
+                        <small>
+                          {{model.city}}
+                        </small>
+                    </div>
+                    <div class="col-3 pt-2">
+                        <small>
+                            {{model.address}}
+                        </small>
+                    </div>
+                    <div class="col-3 pr-1">
+                        <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
                   </div>
-                  <div class="col-3 pt-2">
-                      <small>
-                        {{model.city}}
-                      </small>
-                  </div>
-                  <div class="col-3 pt-2">
-                      <small>
-                          {{model.address}}
-                      </small>
-                  </div>
-                  <div class="col-3 pr-1">
-                      <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                      <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
-                        <mat-icon>edit</mat-icon>
-                      </button>
-                  </div>
+              </div>
+              <div class="container p-0" *ngIf="modelName === 'fighter'">
+                  <div class="row">
+                    <div class="col-2  m-auto">
+                      <img class="fighter-avatar-image" src="{{model.image ? config.storageUrl + model.image : config.profileImagePlaceholderUrl}}" alt="">
+                    </div>
+                    <div class="col-8 pt-2">
+                        <div class="row">
+                          <div class="col-12">
+                              <strong>
+                                {{model.firstname}}
+                                {{model.lastname}}
+                              </strong>
+                            </div>
+                            <div class="col-2 pt-2">
+                                <small>
+                                    {{model.birthdate}}
+                                </small>
+                            </div>
+                            <div class="col-2 pt-2">
+                                <small>
+                                    {{model.weight}}
+                                </small>
+                            </div>
+                            <div class="col-2 pt-2">
+                                <small>
+                                    {{model.height}}
+                                </small>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-2 pr-1 d-flex justify-content-end pt-3">
+                        <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </div>
                 </div>
-            </div>
-            <div class="container p-0" *ngIf="modelName === 'fighter'">
-                <div class="row">
-                  <div class="col-2  m-auto">
-                    <img class="fighter-avatar-image" src="{{model.image ? config.storageUrl + model.image : config.profileImagePlaceholderUrl}}" alt="">
-                  </div>
-                  <div class="col-8 pt-2">
-                      <div class="row">
-                        <div class="col-12">
-                            <strong>
-                              {{model.firstname}}
-                              {{model.lastname}}
-                            </strong>
+              <div class="container p-0" *ngIf="modelName === 'tournament'">
+                  <div class="row">
+                    <div class="col-10 pt-2">
+                        <div class="row">
+                          <div class="col-12">
+                              <strong>
+                                {{model.name}}
+                              </strong>
+                            </div>
+                            <div class="col-4 pt-2">
+                              <div>
+                                  <strong>Starts: </strong> <span>{{model.startdate | date:'short'}}</span>
+                              </div>
+                              <div>
+                                  <strong>Ends: </strong> <span>{{model.enddate | date:'short'}}</span>
+                              </div>
+                            </div>
+                            <div class="col-6 pt-2">
+                                <mat-icon>location_on</mat-icon>
+                                <span>
+                                    {{model.address}}, {{model.city}}
+                                </span>
+                            </div>
                           </div>
-                          <div class="col-2 pt-2">
-                              <small>
-                                  {{model.birthdate}}
-                              </small>
-                          </div>
-                          <div class="col-2 pt-2">
-                              <small>
-                                  {{model.weight}}
-                              </small>
-                          </div>
-                          <div class="col-2 pt-2">
-                              <small>
-                                  {{model.height}}
-                              </small>
-                          </div>
-                        </div>
+                      </div>
+                      <div class="col-2 pr-1 d-flex justify-content-end pt-3">
+                        <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
                     </div>
-                    <div class="col-2 pr-1 d-flex justify-content-end pt-3">
-                      <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
-                        <mat-icon>edit</mat-icon>
-                      </button>
-                      <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-              </div>
-            <div class="container p-0" *ngIf="modelName === 'tournament'">
-                <div class="row">
-                  <div class="col-10 pt-2">
-                      <div class="row">
-                        <div class="col-12">
-                            <strong>
-                              {{model.name}}
-                            </strong>
-                          </div>
-                          <div class="col-2 pt-2">
-                              <small>
-                                  {{model.startdate}}
-                              </small>
-                          </div>
-                          <div class="col-2 pt-2">
-                              <small>
-                                  {{model.enddate}}
-                              </small>
-                          </div>
-                          <div class="col-2 pt-2">
-                              <small>
-                                  {{model.city}}
-                              </small>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-2 pr-1 d-flex justify-content-end pt-3">
-                      <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
-                        <mat-icon>edit</mat-icon>
-                      </button>
-                      <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-              </div>
-          </mat-list-item>
-        </mat-list>
+                </div>
+            </mat-list-item>
+          </mat-list>
+      </ng-scrollbar>
   </mat-card-content>
 </mat-card>

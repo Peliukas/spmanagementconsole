@@ -11,9 +11,9 @@ mat-card-title{
     width: 100%;
 }
 
-/* .fight-contestant-card-container{
-    height: 60px;
-} */
+.fight-contestant-card-container{
+    border-radius: 2px;
+}
 
 .red-fight-contestant-card img, .blue-fight-contestant-card img{
     width: 50%;

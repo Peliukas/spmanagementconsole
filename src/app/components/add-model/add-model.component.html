@@ -102,53 +102,7 @@
       </div>
   </mat-card-content>
 </mat-card>
-<mat-card class="mt-2" *ngIf="modelName === 'tournament'">
-  <mat-card-title>
-    Tournament fights
-    <button mat-raised-button (click)="createFight()" class="float-right">
-        <mat-icon>add</mat-icon>
-        <span>Create fight</span>
-      </button>
-  </mat-card-title>
-  <mat-card-content>
-    <div class="mb-3">
-      <div *ngIf="fightList.length < 1" class="p-5 text-center">
-        <strong class="no-result-text">
-          There are no fights to this tournament yet
-        </strong>
-      </div>
-      <div *ngIf="fightList && fightList.length > 0" class="container">
-        <div *ngFor="let fight of fightList" class="row text-center fight-contestant-card-container pt-2">
-          <div class="fight-contestant-card col-5 m-auto">
-              <div class="red-fight-contestant-card">
-                  <img src="{{config.storageUrl + fight[0].fighter.image}}" alt="">
-                  <div>
-                    <strong>
-                      {{fight[0].fighter.firstname}}
-                      {{fight[0].fighter.lastname}}
-                    </strong>
-                  </div>
-              </div>
-          </div>
-          <div class="col-2 m-auto">
-            <strong>VS</strong>
-          </div>
-          <div class="fight-contestant-card col-5 m-auto">
-              <div class="blue-fight-contestant-card">
-                  <img src="{{config.storageUrl + fight[1].fighter.image}}" alt="">
-                  <div> 
-                    <strong>
-                      {{fight[1].fighter.firstname}}
-                      {{fight[1].fighter.lastname}}
-                    </strong>
-                  </div>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </mat-card-content>
-</mat-card>
+<app-tournament-fight-manager [tournamentId]="modelId" (fightListChanged)="fightList = $event"></app-tournament-fight-manager>
 <mat-card class="mt-2" *ngIf="modelName === 'fightclub'">
   <mat-card-content>
     <div class="col-12 mt-4" *ngIf="modelId">

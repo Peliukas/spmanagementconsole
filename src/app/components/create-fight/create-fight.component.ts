@@ -90,10 +90,10 @@ export class CreateFightComponent implements OnInit {
   }
 
   saveFight(){
-    this.dialogRef.close([
-      {fighter: this.redContestant},
-      {fighter: this.blueContestant},
-    ]);
+    this.dialogRef.close({
+      red: this.redContestant,
+      blue: this.blueContestant
+    });
   }
 
 }

@@ -7,7 +7,7 @@ import {MatCardModule, MatSelectModule, MatSnackBarModule,
         MatTabsModule, MatFormFieldModule, MatInputModule, 
         MatButtonModule, MatListModule, MatIconModule,
         MatDialogModule, MatProgressSpinnerModule, MatNativeDateModule, 
-        MatDatepickerModule} from '@angular/material';
+        MatDatepickerModule, MatExpansionModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component';
@@ -23,6 +23,7 @@ import { ResultFilterComponent } from './components/result-filter/result-filter.
 import { CreateFightComponent } from './components/create-fight/create-fight.component';
 import { FighterCardComponent } from './components/fighter-card/fighter-card.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { TournamentFightManagerComponent } from './components/tournament-fight-manager/tournament-fight-manager.component';
  
 
 
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     ResultFilterComponent,
     CreateFightComponent,
     FighterCardComponent,
+    TournamentFightManagerComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -65,7 +67,7 @@ const appRoutes: Routes = [
     BrowserModule, BrowserAnimationsModule, MatCardModule, MatTabsModule,
      MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule,
      MatIconModule, MatSnackBarModule, MatSelectModule, MatDialogModule,
-     MatDatepickerModule, MatNativeDateModule
+     MatDatepickerModule, MatNativeDateModule, MatExpansionModule 
   ],
   providers: [ApiConfig],
   bootstrap: [AppComponent],

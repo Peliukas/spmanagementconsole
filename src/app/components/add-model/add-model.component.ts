@@ -22,7 +22,7 @@ export class AddModelComponent implements OnInit {
   modelId: any;
   profileImage: any;
   profileImageUrl: any;
-  fightList: any = [];
+  fightList: any[];
   fightclubFormGroup = new FormGroup({
     name: new FormControl(''),
     city: new FormControl(''),
@@ -111,34 +111,41 @@ export class AddModelComponent implements OnInit {
         this.http.post(this.config.apiUrl + this.modelName, tournamentData, this.httpOptions)
         .subscribe(res => {
           if(res > 0){
-            if(this.profileImage){
-              this.modelId = res;
-              this.uploadImage()
-              .subscribe( uploadRes => {
-                this.router.navigate(['/list', this.modelName]);
-              });
-            }else{
-              this.router.navigate(['/list', this.modelName]);
-            }
+            this.router.navigate(['/list', this.modelName]);
           }
         });
         break;
       }
     }else{
       //update model
-      this.http.post(this.config.apiUrl + "update/" + this.modelName + "/" + this.modelId, controlName.getRawValue(), this.httpOptions)
-      .subscribe(res => {
-        if(res > 0){
-          if(this.profileImage){
-            this.uploadImage()
-            .subscribe( uploadRes => {
+      switch(this.modelName){
+        case "fighter":
+        case "fightclub":
+          this.http.post(this.config.apiUrl + "update/" + this.modelName + "/" + this.modelId, controlName.getRawValue(), this.httpOptions)
+          .subscribe(res => {
+            if(res > 0){
+              if(this.profileImage){
+                this.uploadImage()
+                .subscribe( uploadRes => {
+                  this.router.navigate(['/list', this.modelName]);
+                });
+              }else{
+                this.router.navigate(['/list', this.modelName]);
+              }
+            }
+          });
+        break;
+        case "tournament":
+          let tournamentData: any = controlName.getRawValue();
+          tournamentData.tournament_fights = this.fightList;
+          this.http.post(this.config.apiUrl + "update/" + this.modelName + "/" + this.modelId, tournamentData, this.httpOptions)
+          .subscribe(res => {
+            if(res > 0){
               this.router.navigate(['/list', this.modelName]);
-            });
-          }else{
-            this.router.navigate(['/list', this.modelName]);
-          }
-        }
-      });
+            }
+          });
+        break;
+      }
     }
   }
 
@@ -149,17 +156,20 @@ export class AddModelComponent implements OnInit {
         delete this.modelData['id'];
         switch(this.modelName){
           case "fightclub":
-          if(this.modelData['image']){
-            this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
-          }else{
-            this.profileImageUrl = '';
-          }  
+            if(this.modelData['image']){
+              this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
+            }else{
+              this.profileImageUrl = '';
+            }  
             this.fightclubFormGroup.setValue(this.modelData);
           break;
           case "fighter":
             this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
             this.modelData['image'] = '';
             this.fighterFormGroup.setValue(this.modelData);
+          break;
+          case "tournament":
+            this.tournamentFormGroup.setValue(this.modelData);
           break;
         }
       });
@@ -174,19 +184,6 @@ export class AddModelComponent implements OnInit {
     let input = new FormData();
     input.append("image", this.profileImage);
     return this.http.post(this.config.apiUrl + this.modelName + "/image/" + this.modelId, input);
-  }
-
-  createFight(){
-    const dialogRef = this.dialog.open(CreateFightComponent, {
-      width: '60vw',
-      data: {}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.fightList.push(result);
-        console.log(this.fightList);
-      }
-    });
   }
 
 }
