@@ -156,11 +156,13 @@ export class AddModelComponent implements OnInit {
         delete this.modelData['id'];
         switch(this.modelName){
           case "fightclub":
-            if(this.modelData['image']){
-              this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
-            }else{
-              this.profileImageUrl = '';
-            }  
+            // if(this.modelData['image']){
+            //   this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
+            // }else{
+            //   this.profileImageUrl = '';
+            // }  
+            this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
+            this.modelData['image'] = '';
             this.fightclubFormGroup.setValue(this.modelData);
           break;
           case "fighter":
@@ -173,6 +175,11 @@ export class AddModelComponent implements OnInit {
           break;
         }
       });
+  }
+
+  updateFightList(event: any){
+    console.log("fightlist: ",event);
+    this.fightList = event;
   }
 
   profileImageChanged(event: any){

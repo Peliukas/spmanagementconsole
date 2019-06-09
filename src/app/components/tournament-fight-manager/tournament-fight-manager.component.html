@@ -14,24 +14,34 @@
                 There are no fights to this tournament yet
               </strong>
             </div>
-            <div *ngIf="fightList && fightList.length > 0" class="container">
+            <div *ngIf="fightList && fightList.length > 0">
               <mat-accordion>
                 <mat-expansion-panel *ngFor="let fight of fightList">
                   <mat-expansion-panel-header>
                     <mat-panel-description class="d-flex row">
-                        <div class="text-center col-5">
-                            <strong>
-                                {{fight['red'].firstname}}
-                                {{fight['red'].lastname}} 
-                              </strong>
+                        <div class="text-center col-5 d-flex justify-content-center">
+                            <div>
+                              <mat-icon *ngIf="fight.winnerfighterid === fight['red'].id">
+                                  stars
+                              </mat-icon>
+                            </div>
+                            <div>
+                              <strong class="pt-1 ml-1">
+                                  {{fight['red'].firstname}}
+                                  {{fight['red'].lastname}} 
+                                </strong>
+                            </div>
                         </div>
                         <div class="text-center col-2">
                           <strong >
                               VS
                           </strong>
                         </div>
-                        <div class="text-center col-5">
-                          <strong>
+                        <div class="text-center col-5 col-5 d-flex justify-content-center"> 
+                          <mat-icon *ngIf="fight.winnerfighterid === fight['blue'].id">
+                            stars
+                          </mat-icon>
+                          <strong class="pt-1 ml-1">
                             {{fight['blue'].firstname}}
                             {{fight['blue'].lastname}}
                           </strong>
@@ -48,10 +58,10 @@
                   </div>
                   <mat-action-row>
                       <mat-form-field class="col-8">
-                          <input type="text" matInput placeholder="Video URL">
+                          <input type="text" matInput [value]="fight.videourl ? fight.videourl : ''" placeholder="Video URL">
                       </mat-form-field>
                       <mat-form-field class="col-4">
-                        <mat-select placeholder="Fight winner" [value]="fight.winnerfighterid">
+                        <mat-select placeholder="Fight winner" [value]="fight.winnerfighterid" (selectionChange)="setFightWinner(fight.id, $event.value)">
                           <mat-option [value]="fight.red.id">
                             {{fight.red.firstname}}
                             {{fight.red.lastname}}

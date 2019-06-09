@@ -23,34 +23,52 @@
         <h5 class="no-result-text text-center mt-5 mb-4">There are no {{modelName}}s created yet</h5>
       </div>
       <ng-scrollbar>
-        <mat-list role="list" class="m-2">
-            <mat-list-item *ngFor="let model of modelList" class="m-1">
-              <div class="container p-0" *ngIf="modelName === 'fightclub'">
-                  <div class="row">
-                    <div class="col-3 pt-2">
-                        <small>
+        <mat-list role="list" class="m-2" dense>
+            <mat-list-item *ngFor="let model of modelList" class="m-1" [class.fightclub-card]="modelName === 'fightclub'">
+              <div class="w-100 fightclub-image-container" 
+              *ngIf="modelName === 'fightclub'" [routerLink]="['/edit/' + modelName + '/' + model.id]">
+              <div class=" fightclub-image container" [ngStyle]="{'background':'url(' + config.storageUrl + model.image + ')'}" >
+                <div class="row h-100">
+                  <div class="col-6 m-auto">
+                      <h3>
                           {{model.name}}
-                        </small>
+                      </h3>
+                  </div>
+                  <div class="col-6 fightclub-controls d-flex justify-content-end m-auto">
+                      <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                  </div>
+                </div>
+              </div>
+                <div class="container mat-elevation-z10 fightclub-list-item-info p-4">
+                  <div class="row">
+                    <div class="col-3">
+                      <div class="w-100 d-flex">
+                          <div><mat-icon>place</mat-icon></div>
+                          <div class="mt-auto mb-auto"><strong>{{model.address}}, {{model.city}}</strong></div>
+                      </div>
                     </div>
-                    <div class="col-3 pt-2">
-                        <small>
-                          {{model.city}}
-                        </small>
+                    <div class="col-3">
+                      <div class="w-100 d-flex justify-content-center">
+                          <div><mat-icon>email</mat-icon></div>
+                          <div class="mt-auto mb-auto ml-1"><strong>{{model.email}}</strong></div>
+                      </div>
                     </div>
-                    <div class="col-3 pt-2">
-                        <small>
-                            {{model.address}}
-                        </small>
+                    <div class="col-3">
+                      <div class="w-100 d-flex justify-content-center">
+                          <div><mat-icon>phone</mat-icon></div>
+                          <div class="mt-auto mb-auto ml-1"><strong>{{model.phone}}</strong></div>
+                      </div>
                     </div>
-                    <div class="col-3 pr-1">
-                        <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
-                          <mat-icon>delete</mat-icon>
-                        </button>
-                        <button mat-icon-button class="float-right" [routerLink]="['/edit/' + modelName + '/' + model.id]">
-                          <mat-icon>edit</mat-icon>
-                        </button>
+                    <div class="col-3">
+                      <div class="w-100 d-flex justify-content-center">
+                          <div><mat-icon>person</mat-icon></div>
+                          <div class="mt-auto mb-auto ml-1"><strong>{{model.membercount}}</strong></div>
+                      </div>
                     </div>
                   </div>
+                </div>
               </div>
               <div class="container p-0" *ngIf="modelName === 'fighter'">
                   <div class="row">

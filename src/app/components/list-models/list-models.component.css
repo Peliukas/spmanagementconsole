@@ -1,7 +1,41 @@
 mat-list-item{
-    box-shadow: 0px 0px 2px 1px lightgrey!important;
+    /* box-shadow: 0px 0px 2px 1px lightgrey!important; */
     border-radius: 3px!important;
-    height: 120px!important;
+    height: auto!important;
+}
+
+mat-list-item .mat-list-item-content{
+    height: 100%!important;
+    padding:0!important;
+}
+
+.fightclub-card{
+    /* max-height: 260px!important;
+    min-height: 160px!important; */
+}   
+
+.fightclub-image-container{
+    background: black;
+}
+
+.fightclub-list-item-info{
+    background: #f8f9fa;
+}
+
+.fightclub-image{
+    background-size: contain!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    height: 100px;
+}
+
+.fightclub-image h3{
+    color: #f8f9fa;
+    padding-left: 30px;
+}
+
+.fightclub-controls{
+    color: white;
 }
 
 .fighter-avatar-image{

@@ -45,9 +45,19 @@ export class TournamentFightManagerComponent implements OnInit {
             id: results[fight].id,
             red: results[fight]['fight_contestants'][0]['fighter'],
             blue: results[fight]['fight_contestants'][1]['fighter'],
+            winnerfighterid: results[fight]['winnerfighterid'],
           });
         }
       });
+  }
+
+  setFightWinner(fightid: number, victoriousfighterid: number){
+    this.fightList.forEach( singlefight => {
+      if(singlefight.id === fightid){
+        singlefight.winnerfighterid = victoriousfighterid;
+      }
+    });
+    this.fightListChanged.emit(this.fightList);
   }
 
 }
