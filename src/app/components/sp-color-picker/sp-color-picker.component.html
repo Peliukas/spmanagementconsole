@@ -1,0 +1,9 @@
+<div class="row">
+    <mat-form-field class="col-10">                                  
+        <input [(colorPicker)]="selectedColor" placeholder="{{inputPlaceholder}}"  matInput [value]="selectedColor"/>
+    </mat-form-field>
+    <div class="col-2 m-auto">
+        <div class="color-preview" [ngStyle]="{'background': selectedColor}"></div>
+    </div>
+    
+</div>

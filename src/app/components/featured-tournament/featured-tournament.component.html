@@ -1,0 +1,22 @@
+
+<div *ngIf="featuredTournament" class="w-100 banner-config-image-container" [ngStyle]="{'background': 'url(' + config.storageUrl + featuredTournament.image + ')'}">
+  <div class="h-100 banner-content d-flex justify-content-center align-content-center" *ngIf="featuredTournament">
+    <div class="m-auto w-50">
+        <h4 class="text-center banner-title">
+          <strong>{{featuredTournament.name}}</strong>
+        </h4>
+        <p class="text-center">{{featuredTournament.description}}</p>
+        <div class="banner-action-buttons d-flex justify-content-center">
+           <button mat-raised-button class="m-1">Action One</button>
+           <button mat-raised-button class="m-1">Action Two</button>
+        </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!featuredTournament" class="banner-config-image-placeholder w-100 h-100 d-flex">
+    <div class="m-auto">
+      <h4>
+        No featured tournament selected
+      </h4>
+    </div>
+</div>

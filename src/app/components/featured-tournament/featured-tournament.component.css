@@ -1,0 +1,19 @@
+.banner-config-image-container{
+    height: 545px;
+    background-size: contain!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+}
+
+.banner-config-image-placeholder{
+    background: lightgray;
+    color: #7d7b7b;
+}
+
+.banner-content{
+    
+}
+
+.banner-title{
+    font-family: 'Oxygen', sans-serif;
+}

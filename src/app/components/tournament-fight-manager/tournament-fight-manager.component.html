@@ -50,15 +50,15 @@
                   </mat-expansion-panel-header>
                   <div  class="row text-center  pt-2 mt-1 mb-1">
                     <div class="fight-contestant-card col-6 m-auto">
-                      <img src="{{config.storageUrl + fight['red'].image}}" alt="" class="w-50">
+                      <img src="{{config.storageUrl + fight['red'].image}}" alt="">
                     </div>
                     <div class="fight-contestant-card col-6 m-auto">
-                      <img src="{{config.storageUrl + fight['blue'].image}}" alt="" class="w-50">
+                      <img src="{{config.storageUrl + fight['blue'].image}}" alt="">
                     </div>
                   </div>
                   <mat-action-row>
-                      <mat-form-field class="col-8">
-                          <input type="text" matInput [value]="fight.videourl ? fight.videourl : ''" placeholder="Video URL">
+                      <mat-form-field class="col-6">
+                          <input type="text" matInput [value]="fight.videourl ? fight.videourl : ''" placeholder="Video URL" (change)="setTournamentFightVideoUrl(fight.id, $event.srcElement.value)">
                       </mat-form-field>
                       <mat-form-field class="col-4">
                         <mat-select placeholder="Fight winner" [value]="fight.winnerfighterid" (selectionChange)="setFightWinner(fight.id, $event.value)">
@@ -71,7 +71,10 @@
                             {{fight.blue.lastname}}
                           </mat-option>
                         </mat-select>
-                      </mat-form-field>  
+                      </mat-form-field>
+                      <mat-slide-toggle (change)="deleteTournamentFight(fight.id)" class="m-auto">
+                         Delete fight
+                      </mat-slide-toggle>
                   </mat-action-row>
                 </mat-expansion-panel>
               </mat-accordion>

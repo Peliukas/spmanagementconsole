@@ -2,30 +2,28 @@
   <div class="dashboard-top-logo-area container">
     <div class="row">
         <div class="col-2 p-0">
-          <img class="site-logo" src="https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/14225571_1189069641149829_1248505013951375893_n.jpg?_nc_cat=106&_nc_ht=scontent-amt2-1.xx&oh=6623d74ad34e85ad165e433b293d1b0a&oe=5D7494E6" alt="site logo">      
+          <a href="/">
+            <img class="site-logo" src="https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/14225571_1189069641149829_1248505013951375893_n.jpg?_nc_cat=106&_nc_ht=scontent-amt2-1.xx&oh=6623d74ad34e85ad165e433b293d1b0a&oe=5D7494E6" alt="site logo">      
+          </a>  
         </div>
         <div class="col-7">
           <ul class="nav-menu d-flex">
-            <li [routerLink]="['/list', 'fightclub']">Fightclubs</li>
-            <li [routerLink]="['/list', 'fighter']">Fighters</li>
-            <li [routerLink]="['/list', 'tournament']">Tournaments</li>
+            <li [routerLink]="['/admin/list', 'fightclub']">Fightclubs</li>
+            <li [routerLink]="['/admin/list', 'fighter']">Fighters</li>
+            <li [routerLink]="['/admin/list', 'tournament']">Tournaments</li>
+            <li [routerLink]="'/admin/pageconfig'">
+              <strong>Page configuration</strong>
+            </li>
           </ul>
         </div>
         <div class="col-3 mt-3 d-flex justify-content-end p-0">
           <div class="mt-1 mr-3">
-              <strong>User</strong>
+            <strong>User</strong>
           </div>
           <div>
             <img id="user-profile-image" src="http://sg-fs.com/wp-content/uploads/2017/08/user-placeholder.png" alt="user profile image">
           </div>
         </div>
-    </div>
-  </div>
-</div>
-<div class="page-body-container w-100">
-  <div class="container pt-5">
-    <div class="row">
-      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

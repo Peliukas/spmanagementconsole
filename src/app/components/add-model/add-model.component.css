@@ -18,3 +18,10 @@ mat-card-title{
 .red-fight-contestant-card img, .blue-fight-contestant-card img{
     width: 50%;
 }
+
+.tournament-image-placeholder{
+    height: 350px;
+    background-position: center!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+}

@@ -1,0 +1,39 @@
+.site-logo{
+    width: 80px;
+}
+
+.main-user-menu-nav{
+    list-style: none;
+}
+
+.main-user-menu-nav li{
+    font-weight: 600;
+    padding: 10px;
+}
+
+.main-user-menu-nav li a{
+    color: rgba(0,0,0,0.2);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    margin: 15px 25px;
+    outline: none;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.1em;
+}
+
+.main-user-menu-nav li a:hover{
+    color: #ffffff;
+}
+
+.main-user-menu-nav li a::before{
+    color: #1c75bd;
+    content: attr(data-hover);
+    position: absolute;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    box-sizing: border-box;
+}

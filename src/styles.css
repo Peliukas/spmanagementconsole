@@ -5,15 +5,14 @@ body, html{
     height: 100%;
 }
 
-.page-body-container{
-    min-height: 93vh;
-    background-color: #1d74bd;
-    background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
-    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+app-page-configuration-screen, 
+app-list-models, app-homepage{
+    width: 100%!important;
 }
 
-app-list-models{
-    width: 100%;
+.page-body-container{
+    min-height: 93vh;
+    background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
 }
 
 .text-green{

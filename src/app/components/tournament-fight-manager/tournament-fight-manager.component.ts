@@ -46,6 +46,7 @@ export class TournamentFightManagerComponent implements OnInit {
             red: results[fight]['fight_contestants'][0]['fighter'],
             blue: results[fight]['fight_contestants'][1]['fighter'],
             winnerfighterid: results[fight]['winnerfighterid'],
+            videourl: results[fight]['videourl'],
           });
         }
       });
@@ -55,6 +56,24 @@ export class TournamentFightManagerComponent implements OnInit {
     this.fightList.forEach( singlefight => {
       if(singlefight.id === fightid){
         singlefight.winnerfighterid = victoriousfighterid;
+      }
+    });
+    this.fightListChanged.emit(this.fightList);
+  }
+
+  setTournamentFightVideoUrl(fightid: number, videourl: string){
+    this.fightList.forEach( singlefight => {
+      if(singlefight.id === fightid){
+        singlefight.videourl = videourl;
+      }
+    });
+    this.fightListChanged.emit(this.fightList);
+  }
+
+  deleteTournamentFight(fightid: number){
+    this.fightList.forEach( singlefight => {
+      if(singlefight.id === fightid){
+        singlefight.deleted = !singlefight.deleted;
       }
     });
     this.fightListChanged.emit(this.fightList);

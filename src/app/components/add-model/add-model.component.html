@@ -73,19 +73,39 @@
       </div>
       <div class="tournament-form-field-container" *ngIf="modelName === 'tournament'" [formGroup]="tournamentFormGroup">
         <div class="row">
+            <div class="col-12 tournament-image-placeholder" [ngStyle]="{'background' : 'url(' + (profileImageUrl ? profileImageUrl : config.tournamentImagePlaceholderUrl) + ')'}"></div>
+            <div class="col-12 mt-3 mb-3">
+                <image-upload (uploadFinished)="profileImageChanged($event)"
+                  [preview]="false"
+                  [max]="1"></image-upload>
+            </div>  
             <mat-form-field class="col-12">
                 <input type="text" matInput placeholder="Tournament name" formControlName="name">
             </mat-form-field>
-            <mat-form-field class="col-6">
+            <mat-form-field class="col-4">
               <input matInput [matDatepicker]="startdate" placeholder="Start date" formControlName="startdate">
               <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
               <mat-datepicker #startdate></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="col-6">
+            <div class="col-2">
+              <mat-form-field class="w-100">
+                  <input matInput [ngxTimepicker]="startpicker" placeholder="Start time" [format]="24" formControlName="starttime">
+                  <mat-icon matSuffix>access_time</mat-icon>
+              </mat-form-field>
+              <ngx-material-timepicker #startpicker></ngx-material-timepicker>
+            </div>
+            <mat-form-field class="col-4">
               <input matInput [matDatepicker]="enddate" placeholder="End date" formControlName="enddate">
               <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
               <mat-datepicker #enddate></mat-datepicker>
             </mat-form-field>
+            <div class="col-2">
+                <mat-form-field class="w-100">
+                    <input matInput [ngxTimepicker]="endpicker" placeholder="End time" [format]="24" formControlName="endtime">
+                    <mat-icon matSuffix>access_time</mat-icon>
+                </mat-form-field>
+                <ngx-material-timepicker #endpicker></ngx-material-timepicker>
+              </div>
             <mat-form-field class="col-6">
                 <input type="text" matInput placeholder="City" formControlName="city">
             </mat-form-field>

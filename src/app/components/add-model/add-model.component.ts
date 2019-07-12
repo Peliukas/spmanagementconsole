@@ -5,7 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiConfig } from 'src/app/api-config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { CreateFightComponent } from '../create-fight/create-fight.component';
 
 @Component({
   selector: 'app-add-model',
@@ -45,10 +44,13 @@ export class AddModelComponent implements OnInit {
   tournamentFormGroup = new FormGroup({
     name: new FormControl(''),
     startdate: new FormControl(''),
+    starttime: new FormControl(''),
     enddate: new FormControl(''),
+    endtime: new FormControl(''),
     city: new FormControl(''),
     address: new FormControl(''),
-    description: new FormControl('')
+    description: new FormControl(''),
+    image: new FormControl('')
   });
   httpOptions = {
     headers: new HttpHeaders({
@@ -111,7 +113,15 @@ export class AddModelComponent implements OnInit {
         this.http.post(this.config.apiUrl + this.modelName, tournamentData, this.httpOptions)
         .subscribe(res => {
           if(res > 0){
-            this.router.navigate(['/list', this.modelName]);
+            if(this.profileImage){
+              this.modelId = res;
+              this.uploadImage()
+              .subscribe( uploadRes => {
+                this.router.navigate(['/list', this.modelName]);
+              });
+            }else{
+              this.router.navigate(['/list', this.modelName]);
+            }
           }
         });
         break;
@@ -141,7 +151,15 @@ export class AddModelComponent implements OnInit {
           this.http.post(this.config.apiUrl + "update/" + this.modelName + "/" + this.modelId, tournamentData, this.httpOptions)
           .subscribe(res => {
             if(res > 0){
-              this.router.navigate(['/list', this.modelName]);
+              if(this.profileImage){
+                this.modelId = res;
+                this.uploadImage()
+                .subscribe( uploadRes => {
+                  this.router.navigate(['/list', this.modelName]);
+                });
+              }else{
+                this.router.navigate(['/list', this.modelName]);
+              }
             }
           });
         break;
@@ -156,11 +174,6 @@ export class AddModelComponent implements OnInit {
         delete this.modelData['id'];
         switch(this.modelName){
           case "fightclub":
-            // if(this.modelData['image']){
-            //   this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
-            // }else{
-            //   this.profileImageUrl = '';
-            // }  
             this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
             this.modelData['image'] = '';
             this.fightclubFormGroup.setValue(this.modelData);
@@ -171,6 +184,10 @@ export class AddModelComponent implements OnInit {
             this.fighterFormGroup.setValue(this.modelData);
           break;
           case "tournament":
+            this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
+            this.modelData['image'] = '';
+            this.modelData['starttime'] = ""; 
+            this.modelData['endtime'] = ""; 
             this.tournamentFormGroup.setValue(this.modelData);
           break;
         }
@@ -178,7 +195,6 @@ export class AddModelComponent implements OnInit {
   }
 
   updateFightList(event: any){
-    console.log("fightlist: ",event);
     this.fightList = event;
   }
 
