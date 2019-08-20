@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiConfig } from 'src/app/api-config';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-add-model',
@@ -62,6 +62,7 @@ export class AddModelComponent implements OnInit {
     private config: ApiConfig, 
     private route: ActivatedRoute, 
     private router: Router,
+    private snackBar: MatSnackBar,
     public dialog: MatDialog) { }
 
   ngOnInit() {  
@@ -87,83 +88,43 @@ export class AddModelComponent implements OnInit {
       controlName = this.tournamentFormGroup;
       break;
     }
-    if(!this.modelId){
-      //add new model
-      switch(this.modelName){
-        case "fightclub":
-        case "fighter":
-          this.http.post(this.config.apiUrl + this.modelName, controlName.getRawValue(), this.httpOptions)
-          .subscribe(res => {
-            if(res > 0){
-              if(this.profileImage){
-                this.modelId = res;
-                this.uploadImage()
-                .subscribe( uploadRes => {
-                  this.router.navigate(['/list', this.modelName]);
-                });
-              }else{
-                this.router.navigate(['/list', this.modelName]);
-              }
-            }
-          });
-        break;
-        case "tournament":
-        let tournamentData: any = controlName.getRawValue();
-        tournamentData.tournament_fights = this.fightList;
-        this.http.post(this.config.apiUrl + this.modelName, tournamentData, this.httpOptions)
+    switch(this.modelName){
+      case "fightclub":
+      case "fighter":
+        this.http.post(this.config.apiUrl + "addmodel/" + this.modelName, controlName.getRawValue(), this.httpOptions)
         .subscribe(res => {
           if(res > 0){
             if(this.profileImage){
               this.modelId = res;
               this.uploadImage()
               .subscribe( uploadRes => {
-                this.router.navigate(['/list', this.modelName]);
+                this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
               });
             }else{
-              this.router.navigate(['/list', this.modelName]);
+              this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
             }
           }
         });
-        break;
-      }
-    }else{
-      //update model
-      switch(this.modelName){
-        case "fighter":
-        case "fightclub":
-          this.http.post(this.config.apiUrl + "update/" + this.modelName + "/" + this.modelId, controlName.getRawValue(), this.httpOptions)
-          .subscribe(res => {
-            if(res > 0){
-              if(this.profileImage){
-                this.uploadImage()
-                .subscribe( uploadRes => {
-                  this.router.navigate(['/list', this.modelName]);
-                });
-              }else{
-                this.router.navigate(['/list', this.modelName]);
-              }
-            }
-          });
-        break;
-        case "tournament":
-          let tournamentData: any = controlName.getRawValue();
-          tournamentData.tournament_fights = this.fightList;
-          this.http.post(this.config.apiUrl + "update/" + this.modelName + "/" + this.modelId, tournamentData, this.httpOptions)
-          .subscribe(res => {
-            if(res > 0){
-              if(this.profileImage){
-                this.modelId = res;
-                this.uploadImage()
-                .subscribe( uploadRes => {
-                  this.router.navigate(['/list', this.modelName]);
-                });
-              }else{
-                this.router.navigate(['/list', this.modelName]);
-              }
-            }
-          });
-        break;
-      }
+      break;
+      case "tournament":
+      let tournamentData: any = controlName.getRawValue();
+      tournamentData.tournament_fights = this.fightList;
+      tournamentData.id = this.modelId;
+      this.http.post(this.config.apiUrl + "addmodel/" + this.modelName, tournamentData, this.httpOptions)
+      .subscribe(res => {
+        if(res > 0){
+          if(this.profileImage){
+            this.modelId = res;
+            this.uploadImage()
+            .subscribe( uploadRes => {
+              this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
+            });
+          }else{
+            this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
+          }
+        }
+      });
+      break;
     }
   }
 

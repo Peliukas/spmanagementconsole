@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModelManagerComponent } from './model-manager.component';
+import { SponsorManagementComponent } from './sponsor-management.component';
 
-describe('ModelManagerComponent', () => {
-  let component: ModelManagerComponent;
-  let fixture: ComponentFixture<ModelManagerComponent>;
+describe('SponsorManagementComponent', () => {
+  let component: SponsorManagementComponent;
+  let fixture: ComponentFixture<SponsorManagementComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModelManagerComponent ]
+      declarations: [ SponsorManagementComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModelManagerComponent);
+    fixture = TestBed.createComponent(SponsorManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

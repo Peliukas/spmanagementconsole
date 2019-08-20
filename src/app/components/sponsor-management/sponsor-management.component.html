@@ -1,0 +1,55 @@
+<div class="container pt-3 pb-2">
+  <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-6">
+            <mat-card>
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-6">
+                    <mat-form-field class="w-100">
+                        <input type="text" matInput placeholder="Sponsor Name" [value]="selectedSponsor.name" (change)="selectedSponsor.name = $event.target.value">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input type="text" matInput placeholder="Sponsor URL" [value]="selectedSponsor.url" (change)="selectedSponsor.url = $event.target.value">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-6 cropper-preview-image-container">
+                    <img *ngIf="selectedSponsor.logo" class="display-image w-100" [src]="selectedSponsor ? selectedSponsor.logo : ''" >
+                    <div *ngIf="!selectedSponsor.logo" class="display-image-placeholder w-100"></div>
+                    <div>
+                      <button *ngIf="!selectedSponsor.logo" (click)="openCropperDialog()" mat-raised-button class="w-100">Add Image</button>
+                      <button *ngIf="selectedSponsor.logo" mat-raised-button class="w-100" (click)="selectedSponsor.logo = ''">Remove Image</button>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button (click)="saveSponsor()">Save Sponsor</button>
+                <button mat-raised-button (click)="removeSponsor()" *ngIf="selectedSponsor.id > 0">Remove Sponsor</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <div class="col-6 pt-2">
+            <div class="d-flex align-items-lg-center justify-content-between">
+              <h5 class="m-0">Sponsor List</h5>
+              <button (click)="resetSelectedSponsor()" mat-icon-button aria-label="Create new sponsor">
+                  <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <hr>
+            <mat-list *ngIf="sponsorList && sponsorList.length > 0">
+              <mat-list-item *ngFor="let sponsor of sponsorList" class="sponsor-list-item" (click)="selectedSponsor = sponsor">
+                <strong matLine>
+                  {{sponsor.name}}
+                </strong>
+                <img src="{{sponsor.logo}}" alt="" matListAvatar>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+      </div>
+  </div>
+</div>

@@ -124,6 +124,7 @@
 </mat-card>
 <app-tournament-fight-manager *ngIf="modelName === 'tournament'" [tournamentId]="modelId" (fightListChanged)="updateFightList($event)"></app-tournament-fight-manager>
 <mat-card class="mt-2" *ngIf="modelName === 'fightclub'">
+  <mat-card-title>Club Members</mat-card-title>
   <mat-card-content>
     <div class="col-12 mt-4" *ngIf="modelId">
       <app-club-members [clubId]="modelId"></app-club-members>

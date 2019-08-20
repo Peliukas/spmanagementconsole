@@ -64,7 +64,7 @@ export class ListModelsComponent implements OnInit {
   }
 
   deleteModel(id: number){
-    this.http.delete(this.config.apiUrl + this.modelName + '/' + id)
+    this.http.delete(this.config.apiUrl + "deletemodel/" + this.modelName + '/' + id)
       .subscribe(res => {
         if(res){
           this.snackBar.open(this.modelName + " has been removed!", "OK", {

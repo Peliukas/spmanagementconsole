@@ -1,0 +1,19 @@
+
+/* .cropper-preview-image-container{
+    height: 200px;
+} */
+
+.display-image-placeholder{
+    width: 250px;
+    height: 200px;
+    background: #a9a9a957
+}
+
+.sponsor-list-logo{
+    height: 50px;
+    width: 50px;
+}
+
+.sponsor-list-item:hover{
+    background: #d3d3d361;
+}

@@ -1,14 +1,22 @@
 
 <div *ngIf="featuredTournament" class="w-100 banner-config-image-container" [ngStyle]="{'background': 'url(' + config.storageUrl + featuredTournament.image + ')'}">
-  <div class="h-100 banner-content d-flex justify-content-center align-content-center" *ngIf="featuredTournament">
+  <div class="h-100 banner-content d-flex justify-content-center align-content-center" *ngIf="allPageConfigurations">
     <div class="m-auto w-50">
-        <h4 class="text-center banner-title">
+        <h4 class="text-center banner-title" [style.color]="allPageConfigurations.title_color">
           <strong>{{featuredTournament.name}}</strong>
         </h4>
-        <p class="text-center">{{featuredTournament.description}}</p>
+        <p class="text-center" [style.color]="allPageConfigurations.description_color">{{featuredTournament.description}}</p>
         <div class="banner-action-buttons d-flex justify-content-center">
-           <button mat-raised-button class="m-1">Action One</button>
-           <button mat-raised-button class="m-1">Action Two</button>
+           <button mat-raised-button class="m-1" *ngIf="allPageConfigurations.enable_action_button_1 == 1">
+              <a href="{{allPageConfigurations.action_button_1_url !== '' ? allPageConfigurations.action_button_1_url : '#'}}">
+                {{allPageConfigurations.action_button_1_label}}
+              </a>
+            </button>
+           <button mat-raised-button class="m-1" *ngIf="allPageConfigurations.enable_action_button_2 == 1">
+              <a href="{{allPageConfigurations.action_button_2_url !== '' ? allPageConfigurations.action_button_2_url : '#'}}">
+                {{allPageConfigurations.action_button_2_label}}
+              </a>
+            </button>
         </div>
     </div>
   </div>
@@ -19,4 +27,4 @@
         No featured tournament selected
       </h4>
     </div>
-</div>
+</div> 

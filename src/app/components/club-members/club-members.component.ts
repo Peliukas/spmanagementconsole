@@ -56,7 +56,6 @@ export class ClubMembersComponent implements OnInit {
   memberListChanged(event: any){
     this.memberList = [];
     for(let filteredMember in event){
-      console.log(filteredMember);
       this.memberList.push(event[filteredMember]);
     }
   }

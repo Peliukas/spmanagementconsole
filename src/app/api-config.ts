@@ -12,5 +12,4 @@ export class ApiConfig {
           'Content-Type':  'application/json'
         })
       };   
-
 }

@@ -6,7 +6,6 @@ import { AdmindashboardComponent } from './components/admindashboard/admindashbo
 import { AddModelComponent } from './components/add-model/add-model.component';
 import { ApiConfig } from './api-config';
 import { ListModelsComponent } from './components/list-models/list-models.component';
-import { ModelManagerComponent } from './components/model-manager/model-manager.component';
 import { ClubMembersComponent } from './components/club-members/club-members.component';
 import { AgeConverterPipe } from './pipes/age-converter.pipe';
 import { UnassignedFighterListComponent } from './components/unassigned-fighter-list/unassigned-fighter-list.component';
@@ -18,11 +17,14 @@ import { HomepageComponent } from './modules/sp-website/components/homepage/home
 import { MainUserMenuComponent } from './components/main-user-menu/main-user-menu.component';
 import { PageConfigurationScreenComponent } from './components/page-configuration-screen/page-configuration-screen.component';
 import { SharedComponentWrapperModule } from './modules/shared-component-wrapper/shared-component-wrapper.module'; 
+import { ImageCropperModule } from 'ng2-img-cropper'; 
 import {MatCardModule, MatSelectModule, MatSnackBarModule, 
   MatTabsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
   MatButtonModule, MatListModule, MatIconModule, MatSlideToggleModule,
   MatDialogModule, MatProgressSpinnerModule, MatNativeDateModule, 
   MatDatepickerModule, MatExpansionModule} from '@angular/material';
+import { SlickModule } from 'ngx-slick';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +34,8 @@ import { ImageUploadModule } from "angular2-image-upload";
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { SpColorPickerComponent } from './components/sp-color-picker/sp-color-picker.component';
+import { SponsorManagementComponent } from './components/sponsor-management/sponsor-management.component';
+import { ImageCropperWithUploadComponent } from './components/image-cropper-with-upload/image-cropper-with-upload.component';
 
 const appRoutes: Routes = [
   { 
@@ -62,7 +66,6 @@ const appRoutes: Routes = [
     AdmindashboardComponent,
     AddModelComponent,
     ListModelsComponent,
-    ModelManagerComponent,
     ClubMembersComponent,
     AgeConverterPipe,
     UnassignedFighterListComponent,
@@ -72,7 +75,9 @@ const appRoutes: Routes = [
     TournamentFightManagerComponent,
     MainUserMenuComponent,
     PageConfigurationScreenComponent,
-    SpColorPickerComponent
+    SpColorPickerComponent,
+    SponsorManagementComponent,
+    ImageCropperWithUploadComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -82,12 +87,12 @@ const appRoutes: Routes = [
     MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule,ColorPickerModule, 
     MatIconModule, MatSnackBarModule, MatSelectModule, MatDialogModule, MatCheckboxModule,
     MatDatepickerModule, MatNativeDateModule, MatExpansionModule, MatSlideToggleModule,
-    ReactiveFormsModule, HttpClientModule, 
+    ReactiveFormsModule, HttpClientModule, ImageCropperModule,
     NgScrollbarModule, NgxMaterialTimepickerModule, ImageUploadModule.forRoot(), 
-    BrowserModule.withServerTransition({ appId: 'serverApp' }), BrowserAnimationsModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }), BrowserAnimationsModule, SlickModule.forRoot()
   ],
   providers: [ApiConfig],
   bootstrap: [AppComponent],
-  entryComponents: [UnassignedFighterListComponent, CreateFightComponent],
+  entryComponents: [UnassignedFighterListComponent, CreateFightComponent, ImageCropperWithUploadComponent],
 })
 export class AppModule { }

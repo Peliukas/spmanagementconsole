@@ -1,0 +1,13 @@
+<mat-dialog-content>
+    <div class="d-flex justify-content-center image-cropper-container p-3">
+        <img-cropper #cropper [image]="data ? data : ''" [settings]="cropperSettings"></img-cropper>
+    </div>
+    <div>
+        <image-upload (uploadFinished)="fileChangeListener($event)"
+        [preview]="false"
+        [max]="1"></image-upload>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button (click)="cropAndClose()">Crop Image</button>
+</mat-dialog-actions>
