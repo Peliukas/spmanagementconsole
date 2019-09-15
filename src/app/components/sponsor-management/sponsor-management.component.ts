@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiConfig } from 'src/app/api-config';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ImageCropperWithUploadComponent } from '../image-cropper-with-upload/image-cropper-with-upload.component';
+import { ApiManagerService } from 'src/app/services/api-manager.service';
 
 @Component({
   selector: 'app-sponsor-management',
@@ -24,8 +25,7 @@ export class SponsorManagementComponent implements OnInit {
     })
   };
 
-  constructor(private http:HttpClient, 
-    private config: ApiConfig,
+  constructor(private apiManager: ApiManagerService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog) {
     
@@ -46,7 +46,7 @@ export class SponsorManagementComponent implements OnInit {
   }
 
   getSponsorList(){
-    this.http.get(this.config.apiUrl + "sponsor")
+    this.apiManager.getModelList("sponsor")
       .subscribe(result => {
          this.sponsorList = [];
          for(let sponsor in result){
@@ -56,7 +56,7 @@ export class SponsorManagementComponent implements OnInit {
   }
 
   saveSponsor(){
-    this.http.post(this.config.apiUrl + "addmodel/sponsor", this.selectedSponsor, this.httpOptions)
+    this.apiManager.addModel('sponsor', this.selectedSponsor)
     .subscribe(result => {
       if(result){
         this.selectedSponsor.id = result;
@@ -67,7 +67,7 @@ export class SponsorManagementComponent implements OnInit {
   }
   
   removeSponsor(){
-    this.http.delete(this.config.apiUrl + "deletemodel/sponsor/" + this.selectedSponsor.id, this.httpOptions)
+    this.apiManager.deleteModel('sponsor', this.selectedSponsor.id)
     .subscribe(result => {
       if(result){
         this.getSponsorList();

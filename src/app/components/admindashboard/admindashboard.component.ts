@@ -7,7 +7,6 @@ import {Component, OnInit, Input } from '@angular/core';
 })
 export class AdmindashboardComponent implements OnInit {
 
-  @Input() selectedModel: string = 'fightclub';
  
   constructor() { }
 

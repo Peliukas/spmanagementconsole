@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiConfig } from 'src/app/api-config';
-import { HttpClient } from '@angular/common/http';
+import { ApiManagerService } from 'src/app/services/api-manager.service';
 
 @Component({
   selector: 'app-featured-tournament',
@@ -11,17 +10,19 @@ export class FeaturedTournamentComponent implements OnInit {
 
   @Input() featuredTournament: any;
   @Input() customConfig: any;
+  storageUrl: string;
   allPageConfigurations: any = [];
-  constructor(private http: HttpClient,private config: ApiConfig) { }
+  constructor(private apiManager: ApiManagerService) { }
 
   ngOnInit() {
+    this.storageUrl = this.apiManager.getStorageUrl();
     this.getAllPageConfigurations();
   }
 
 
   getAllPageConfigurations(){
     if(!this.customConfig){
-      this.http.get(this.config.apiUrl + 'pageconfig/homepage')
+      this.apiManager.getAllPageConfigurations("homepage")
       .subscribe( res => {
         for(let c in res){
           this.allPageConfigurations[c] = res[c].paramvalue;
@@ -29,7 +30,6 @@ export class FeaturedTournamentComponent implements OnInit {
       });
     }else{
       this.allPageConfigurations = this.customConfig;
-      console.log(this.allPageConfigurations);
     }
   }
 

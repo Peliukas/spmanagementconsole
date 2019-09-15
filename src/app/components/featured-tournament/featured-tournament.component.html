@@ -1,5 +1,5 @@
 
-<div *ngIf="featuredTournament" class="w-100 banner-config-image-container" [ngStyle]="{'background': 'url(' + config.storageUrl + featuredTournament.image + ')'}">
+<div *ngIf="featuredTournament" class="w-100 banner-config-image-container" [ngStyle]="{'background': 'url(' + storageUrl + featuredTournament.image + ')'}">
   <div class="h-100 banner-content d-flex justify-content-center align-content-center" *ngIf="allPageConfigurations">
     <div class="m-auto w-50">
         <h4 class="text-center banner-title" [style.color]="allPageConfigurations.title_color">

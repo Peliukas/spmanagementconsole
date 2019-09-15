@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ApiConfig } from 'src/app/api-config';
 import { MatSnackBar } from '@angular/material';
+import { ApiManagerService } from 'src/app/services/api-manager.service';
 
 @Component({
   selector: 'app-page-configuration-screen',
@@ -26,8 +25,7 @@ export class PageConfigurationScreenComponent implements OnInit {
     description_color: "#000"
   };
 
-  constructor(private http:HttpClient, 
-              private config: ApiConfig,
+  constructor(private apiManager: ApiManagerService,
               private snackbar: MatSnackBar) { }
 
   ngOnInit() {
@@ -42,7 +40,7 @@ export class PageConfigurationScreenComponent implements OnInit {
   }  
 
   getAllPageConfigurations(){
-    this.http.get(this.config.apiUrl + 'pageconfig/homepage')
+    this.apiManager.getAllPageConfigurations('homepage')
     .subscribe( res => {
       for(let localConfig in this.allPageConfigurations){
         this.allPageConfigurations[localConfig] = res[localConfig].paramvalue;
@@ -52,14 +50,14 @@ export class PageConfigurationScreenComponent implements OnInit {
   }
 
   getFeaturedTournament(){
-    this.http.get(this.config.apiUrl + 'search/tournament/id/' +  this.allPageConfigurations['selected_featured_tournament_id'])
+    this.apiManager.searchForModel('tournament', 'id' ,this.allPageConfigurations['selected_featured_tournament_id'])
     .subscribe( res => {
       this.featuredTournament = res[this.allPageConfigurations['selected_featured_tournament_id']];
     });
   }
 
   getTournamentList(){
-    this.http.get(this.config.apiUrl + 'tournament')
+    this.apiManager.getModelList("tournament")
     .subscribe( res => {
       for(let tournament in res){
         this.tournamentList.push(res[tournament]);
@@ -68,7 +66,7 @@ export class PageConfigurationScreenComponent implements OnInit {
   }
 
   saveFeaturedTournamentConfiguration(){
-    this.http.post(this.config.apiUrl + 'pageconfig/homepage', this.allPageConfigurations, this.config.httpOptions)
+    this.apiManager.savePageConfigurationList('homepage', this.allPageConfigurations)
       .subscribe(res => {
         if(res){
           this.snackbar.open("Changes have been successfully saved.", "OK", {

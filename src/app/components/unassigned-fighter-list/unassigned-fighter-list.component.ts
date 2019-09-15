@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { ApiConfig } from 'src/app/api-config';
+import { ApiManagerService } from 'src/app/services/api-manager.service';
 @Component({
   selector: 'app-unassigned-fighter-list',
   templateUrl: './unassigned-fighter-list.component.html',
@@ -17,7 +18,7 @@ export class UnassignedFighterListComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<UnassignedFighterListComponent>,
-    private http:HttpClient, private config: ApiConfig,
+    private apiManager: ApiManagerService,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit() {
@@ -27,7 +28,7 @@ export class UnassignedFighterListComponent implements OnInit {
 
   getUnassignedFighters(){
     this.unassignedFighters = [];
-    this.http.get(this.config.apiUrl + 'fighters/unassigned')
+    this.apiManager.getUnassignedFighters()
     .subscribe(res => {
       let keys = Object.keys(res);
       for(let i = 0; i < keys.length; i++){
@@ -48,7 +49,7 @@ export class UnassignedFighterListComponent implements OnInit {
   }
 
   saveSelected(){
-    this.http.post(this.config.apiUrl + "assign/fighters/" + this.clubId, {fighterlist: this.selectedUnassignedFighters})
+    this.apiManager.assignFighters(this.clubId, this.selectedUnassignedFighters)
       .subscribe(res => {
         if(res){
           this.dialogRef.close(true);

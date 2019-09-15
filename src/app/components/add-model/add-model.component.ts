@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiConfig } from 'src/app/api-config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import { ApiManagerService } from 'src/app/services/api-manager.service';
 
 @Component({
   selector: 'app-add-model',
@@ -58,11 +59,9 @@ export class AddModelComponent implements OnInit {
     })
   };
 
-  constructor(private http:HttpClient, 
-    private config: ApiConfig, 
-    private route: ActivatedRoute, 
-    private router: Router,
+  constructor(private apiManager: ApiManagerService, 
     private snackBar: MatSnackBar,
+    private route: ActivatedRoute, 
     public dialog: MatDialog) { }
 
   ngOnInit() {  
@@ -91,7 +90,7 @@ export class AddModelComponent implements OnInit {
     switch(this.modelName){
       case "fightclub":
       case "fighter":
-        this.http.post(this.config.apiUrl + "addmodel/" + this.modelName, controlName.getRawValue(), this.httpOptions)
+        this.apiManager.addModel(this.modelName, controlName.getRawValue())
         .subscribe(res => {
           if(res > 0){
             if(this.profileImage){
@@ -110,7 +109,7 @@ export class AddModelComponent implements OnInit {
       let tournamentData: any = controlName.getRawValue();
       tournamentData.tournament_fights = this.fightList;
       tournamentData.id = this.modelId;
-      this.http.post(this.config.apiUrl + "addmodel/" + this.modelName, tournamentData, this.httpOptions)
+      this.apiManager.addModel(this.modelName, tournamentData)
       .subscribe(res => {
         if(res > 0){
           if(this.profileImage){
@@ -129,23 +128,23 @@ export class AddModelComponent implements OnInit {
   }
 
   populateInputs(){
-    this.http.get(this.config.apiUrl + 'search/' + this.modelName + '/id/' + this.modelId)
+    this.apiManager.searchForModel(this.modelName, 'id', this.modelId)
       .subscribe(res => {
         this.modelData = res[this.modelId];
         delete this.modelData['id'];
         switch(this.modelName){
           case "fightclub":
-            this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
+            this.profileImageUrl = this.apiManager.getStorageUrl() + this.modelData['image'];
             this.modelData['image'] = '';
             this.fightclubFormGroup.setValue(this.modelData);
           break;
           case "fighter":
-            this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
+            this.profileImageUrl = this.apiManager.getStorageUrl() + this.modelData['image'];
             this.modelData['image'] = '';
             this.fighterFormGroup.setValue(this.modelData);
           break;
           case "tournament":
-            this.profileImageUrl = this.config.storageUrl + this.modelData['image'];
+            this.profileImageUrl = this.apiManager.getStorageUrl() + this.modelData['image'];
             this.modelData['image'] = '';
             this.modelData['starttime'] = ""; 
             this.modelData['endtime'] = ""; 
@@ -167,7 +166,7 @@ export class AddModelComponent implements OnInit {
   uploadImage() {
     let input = new FormData();
     input.append("image", this.profileImage);
-    return this.http.post(this.config.apiUrl + this.modelName + "/image/" + this.modelId, input);
+    return this.apiManager.uploadImage(this.modelName, this.modelId, input);
   }
 
 }

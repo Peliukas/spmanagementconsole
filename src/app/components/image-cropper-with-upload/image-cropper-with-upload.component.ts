@@ -34,7 +34,6 @@ export class ImageCropperWithUploadComponent implements OnInit {
 
   fileChangeListener(event: any) {
     var image:any = new Image();
-    var file:File = event.file;
     image.src = event.src;
     this.data.image = event.src;
     this.cropper.setImage(image);

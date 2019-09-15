@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ApiConfig } from 'src/app/api-config';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { ApiManagerService } from 'src/app/services/api-manager.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-list-models',
@@ -15,12 +15,23 @@ export class ListModelsComponent implements OnInit {
   modelName: string;
   modelList: any[];
 
-  constructor(private http:HttpClient, 
-              private config: ApiConfig, 
+  constructor(private apiManager: ApiManagerService,
               private snackBar: MatSnackBar,
+              private auth: AuthenticationService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.auth.verifyToken()
+    .subscribe(authorized => {
+      if(!authorized){
+        this.auth.redirectToLogin();
+      }else{
+        this.setModel();
+      }
+    });
+  }
+
+  setModel(){
     this.route.params.subscribe(params => {
       this.modelName = params['modelName']; 
       this.getModelList();
@@ -28,7 +39,7 @@ export class ListModelsComponent implements OnInit {
   }
 
   getModelList(){
-    this.http.get(this.config.apiUrl + this.modelName)
+    this.apiManager.getModelList(this.modelName)
     .subscribe(res => {
       if(res){
         let templist = [];
@@ -41,17 +52,18 @@ export class ListModelsComponent implements OnInit {
   }
 
   searchForModel(value:any){
-    if(value){
-      this.modelList = [];
-      this.http.get(this.config.apiUrl + 'search/' + this.modelName + '/name/' + value)
-      .subscribe(res => {
-        for(let singleres in res){
-          this.modelList.push(res[singleres]);
-        }
-      });
-    }else{
-      this.getModelList();
-    }
+    // needs adaptation to each model
+    // if(value){
+    //   this.modelList = [];
+    //   this.apiManager.searchForModel(this.modelName, value)
+    //   .subscribe(res => {
+    //     for(let singleres in res){
+    //       this.modelList.push(res[singleres]);
+    //     }
+    //   });
+    // }else{
+    //   this.getModelList();
+    // }
   }
 
   areYouSure(id: number){
@@ -64,7 +76,7 @@ export class ListModelsComponent implements OnInit {
   }
 
   deleteModel(id: number){
-    this.http.delete(this.config.apiUrl + "deletemodel/" + this.modelName + '/' + id)
+    this.apiManager.deleteModel(this.modelName, id)
       .subscribe(res => {
         if(res){
           this.snackBar.open(this.modelName + " has been removed!", "OK", {

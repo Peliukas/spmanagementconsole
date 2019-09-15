@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiConfig } from 'src/app/api-config';
 import { HttpClient } from '@angular/common/http';
+import { ApiManagerService } from 'src/app/services/api-manager.service';
 
 @Component({
   selector: 'app-result-filter',
@@ -22,7 +23,7 @@ export class ResultFilterComponent implements OnInit {
     'weight'
   ];
 
-  constructor(private http:HttpClient, private config: ApiConfig) { }
+  constructor(private apiManager: ApiManagerService) { }
 
   ngOnInit() {
     switch(this.filterType){
@@ -38,12 +39,12 @@ export class ResultFilterComponent implements OnInit {
     switch(this.filterType){
       case "clubmembers":
         if(searchFieldValue){
-          this.http.get(this.config.apiUrl + 'clubmembers/' + this.params.clubId + '/'+ this.selectedSearchIndex +'/' + searchFieldValue )
+          this.apiManager.getClubMembersBy(this.params.clubId, this.selectedSearchIndex, searchFieldValue)
           .subscribe(res => {
             this.filteredResults.emit(res);
           });
         }else{
-          this.http.get(this.config.apiUrl + 'clubmembers/' + this.params.clubId )
+          this.apiManager.getClubMembers(this.params.clubId)
           .subscribe(res => {
             this.filteredResults.emit(res);
           });
@@ -51,12 +52,12 @@ export class ResultFilterComponent implements OnInit {
       break;
       case "unassignedfighters":
         if(searchFieldValue){
-          this.http.get(this.config.apiUrl + '/fighters/unassigned/' + this.selectedSearchIndex +'/' + searchFieldValue )
+          this.apiManager.getUnassignedFightersBy(this.selectedSearchIndex, searchFieldValue)
             .subscribe(res => {
               this.filteredResults.emit(res);
             });
         }else{
-          this.http.get(this.config.apiUrl + '/fighters/unassigned/')
+          this.apiManager.getUnassignedFighters()
             .subscribe(res => {
               this.filteredResults.emit(res);
             });

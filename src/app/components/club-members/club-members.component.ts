@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiConfig } from 'src/app/api-config';
-import { HttpClient } from '@angular/common/http';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import { UnassignedFighterListComponent } from '../unassigned-fighter-list/unassigned-fighter-list.component';
+import { ApiManagerService } from 'src/app/services/api-manager.service';
 
 @Component({
   selector: 'app-club-members',
@@ -14,14 +13,16 @@ export class ClubMembersComponent implements OnInit {
   @Input() clubId: number;
   memberList: any;
 
-  constructor(private http:HttpClient, private config: ApiConfig, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(public dialog: MatDialog, 
+              public snackBar: MatSnackBar,
+              private apiManager: ApiManagerService) { }
 
   ngOnInit() {
     this.getClubMembers();
   }
 
   getClubMembers(){
-    this.http.get(this.config.apiUrl + 'clubmembers/' + this.clubId)
+    this.apiManager.getClubMembers(this.clubId)
     .subscribe(res => {
       let keys = Object.keys(res);
       if(keys.length > 0){

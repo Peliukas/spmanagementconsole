@@ -22,7 +22,7 @@ import {MatCardModule, MatSelectModule, MatSnackBarModule,
   MatTabsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
   MatButtonModule, MatListModule, MatIconModule, MatSlideToggleModule,
   MatDialogModule, MatProgressSpinnerModule, MatNativeDateModule, 
-  MatDatepickerModule, MatExpansionModule} from '@angular/material';
+  MatDatepickerModule, MatExpansionModule, MatMenuModule} from '@angular/material';
 import { SlickModule } from 'ngx-slick';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -36,6 +36,11 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { SpColorPickerComponent } from './components/sp-color-picker/sp-color-picker.component';
 import { SponsorManagementComponent } from './components/sponsor-management/sponsor-management.component';
 import { ImageCropperWithUploadComponent } from './components/image-cropper-with-upload/image-cropper-with-upload.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { BrowseFightsComponent } from './components/browse-fights/browse-fights.component';
+import { VideoListCardComponent } from './components/video-list-card/video-list-card.component';
 
 const appRoutes: Routes = [
   { 
@@ -55,8 +60,24 @@ const appRoutes: Routes = [
     component: PageConfigurationScreenComponent
   },
   { 
+    path: 'admin/dashboard',
+    component: AdmindashboardComponent
+  },
+  { 
+    path: 'videos',
+    component: BrowseFightsComponent
+  },
+  { 
     path: '',
     component: HomepageComponent
+  },
+  { 
+    path: 'sp-login',
+    component: LoginPageComponent
+  },
+  { 
+    path: '**', 
+    component: PageNotFoundComponent 
   }
 ];
 
@@ -77,7 +98,12 @@ const appRoutes: Routes = [
     PageConfigurationScreenComponent,
     SpColorPickerComponent,
     SponsorManagementComponent,
-    ImageCropperWithUploadComponent
+    ImageCropperWithUploadComponent,
+    LoginPageComponent,
+    NavigationBarComponent,
+    PageNotFoundComponent,
+    BrowseFightsComponent,
+    VideoListCardComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -86,7 +112,7 @@ const appRoutes: Routes = [
     SpWebsiteModule, SharedComponentWrapperModule, RouterModule, MatProgressSpinnerModule, MatCardModule, MatTabsModule,
     MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule,ColorPickerModule, 
     MatIconModule, MatSnackBarModule, MatSelectModule, MatDialogModule, MatCheckboxModule,
-    MatDatepickerModule, MatNativeDateModule, MatExpansionModule, MatSlideToggleModule,
+    MatDatepickerModule, MatNativeDateModule, MatExpansionModule, MatSlideToggleModule, MatMenuModule,
     ReactiveFormsModule, HttpClientModule, ImageCropperModule,
     NgScrollbarModule, NgxMaterialTimepickerModule, ImageUploadModule.forRoot(), 
     BrowserModule.withServerTransition({ appId: 'serverApp' }), BrowserAnimationsModule, SlickModule.forRoot()

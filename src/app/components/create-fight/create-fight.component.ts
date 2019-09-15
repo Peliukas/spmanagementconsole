@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ApiConfig } from 'src/app/api-config';
 import { HttpClient } from '@angular/common/http';
+import { ApiManagerService } from 'src/app/services/api-manager.service';
 
 @Component({
   selector: 'app-create-fight',
@@ -21,8 +22,7 @@ export class CreateFightComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CreateFightComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private http:HttpClient, 
-    private config: ApiConfig ) { }
+    private apiManager: ApiManagerService ) { }
 
   ngOnInit() {
    this.chooseContestant("red");
@@ -30,7 +30,7 @@ export class CreateFightComponent implements OnInit {
   }
 
   getFightContestantCandidates(){
-    this.http.get(this.config.apiUrl + 'clubmembers/' + this.selectedClubId)
+    this.apiManager.getClubMembers(this.selectedClubId)
       .subscribe(res => {
         this.fightclubMembers = []
         for(let index in res){
@@ -56,7 +56,7 @@ export class CreateFightComponent implements OnInit {
   }
 
   getFightclubs(){
-    this.http.get(this.config.apiUrl + 'fightclub')
+    this.apiManager.getModelList("fightclub")
     .subscribe(res => {
       this.fightclubList = [];
       for(let index in res){

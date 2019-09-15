@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row" *ngIf="videoList">
+      <div class="col-4" *ngFor="let video of videoList">
+        <app-video-list-card [videoData]="video"></app-video-list-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

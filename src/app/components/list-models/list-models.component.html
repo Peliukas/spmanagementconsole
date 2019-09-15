@@ -27,7 +27,7 @@
             <mat-list-item *ngFor="let model of modelList" class="m-1" [class.fightclub-card]="modelName === 'fightclub'">
               <div class="w-100 fightclub-image-container" 
               *ngIf="modelName === 'fightclub'" [routerLink]="['/admin/edit/' + modelName + '/' + model.id]">
-              <div class=" fightclub-image container" [ngStyle]="{'background':'url(' + config.storageUrl + model.image + ')'}" >
+              <div class=" fightclub-image container" [ngStyle]="{'background':'url(' + apiManager.config.storageUrl + model.image + ')'}" >
                 <div class="row h-100">
                   <div class="col-6 m-auto">
                       <h3>
@@ -73,7 +73,7 @@
               <div class="container p-0" *ngIf="modelName === 'fighter'">
                   <div class="row">
                     <div class="col-2  m-auto">
-                      <img class="fighter-avatar-image" src="{{model.image ? config.storageUrl + model.image : config.profileImagePlaceholderUrl}}" alt="">
+                      <img class="fighter-avatar-image" src="{{model.image ? apiManager.config.storageUrl + model.image : apiManager.config.profileImagePlaceholderUrl}}" alt="">
                     </div>
                     <div class="col-8 pt-2">
                         <div class="row">

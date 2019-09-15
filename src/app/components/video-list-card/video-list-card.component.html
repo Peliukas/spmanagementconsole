@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row" *ngIf="fightContestants.length > 0">
+      <div class="col-6" *ngFor="let fighter of fightContestants">
+        <div class="w-100 video-list-card-image align-items-end d-flex" [ngStyle]="{'background-image':'url(' + apiManager.config.storageUrl + fighter.image + ')'}">
+          <div class="w-100 text-center fighter-name-container">
+            <span class="fighter-name font-weight-bold">{{fighter.firstname}} {{fighter.lastname}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <h5 class="text-center">{{videoData.tournament.name}}</h5> -->
+  </mat-card-content>
+  <mat-card-footer>
+    <!-- <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <span class="tournament-name">{{videoData.tournament.name}}</span>
+        </div>
+      </div>
+    </div> -->
+  </mat-card-footer>
+</mat-card>

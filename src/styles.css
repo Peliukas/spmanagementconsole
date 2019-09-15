@@ -6,8 +6,12 @@ body, html{
 }
 
 app-page-configuration-screen, 
-app-list-models, app-homepage{
+app-list-models, app-homepage, app-browse-fights{
     width: 100%!important;
+}
+
+app-login-page{
+    margin: auto;
 }
 
 .page-body-container{

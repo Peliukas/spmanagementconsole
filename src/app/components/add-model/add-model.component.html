@@ -5,7 +5,7 @@
   <mat-card-content>
       <div class="fightclub-form-field-container row" *ngIf="modelName === 'fightclub'" [formGroup]="fightclubFormGroup">
         <div class="col-6">
-            <img class="w-100" alt="" src="{{profileImageUrl ? profileImageUrl : config.fightclubImagePlaceholderUrl}}">
+            <img class="w-100" alt="" src="{{profileImageUrl ? profileImageUrl : apiManager.config.fightclubImagePlaceholderUrl}}">
             <image-upload (uploadFinished)="profileImageChanged($event)"
                           [preview]="false"
                           [max]="1"></image-upload>
@@ -38,7 +38,7 @@
       <div class="fighter-form-field-container" *ngIf="modelName === 'fighter'" [formGroup]="fighterFormGroup">
         <div class="row">
             <div class="col-4 mt-4">
-                <img class="w-100" alt="" src="{{profileImageUrl ? profileImageUrl : config.profileImagePlaceholderUrl}}">
+                <img class="w-100" alt="" src="{{profileImageUrl ? profileImageUrl : apiManager.config.profileImagePlaceholderUrl}}">
                 <image-upload (uploadFinished)="profileImageChanged($event)"
                               [preview]="false"
                               [max]="1"></image-upload>
@@ -73,7 +73,7 @@
       </div>
       <div class="tournament-form-field-container" *ngIf="modelName === 'tournament'" [formGroup]="tournamentFormGroup">
         <div class="row">
-            <div class="col-12 tournament-image-placeholder" [ngStyle]="{'background' : 'url(' + (profileImageUrl ? profileImageUrl : config.tournamentImagePlaceholderUrl) + ')'}"></div>
+            <div class="col-12 tournament-image-placeholder" [ngStyle]="{'background' : 'url(' + (profileImageUrl ? profileImageUrl : apiManager.config.tournamentImagePlaceholderUrl) + ')'}"></div>
             <div class="col-12 mt-3 mb-3">
                 <image-upload (uploadFinished)="profileImageChanged($event)"
                   [preview]="false"

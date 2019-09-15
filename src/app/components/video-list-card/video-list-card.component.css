@@ -1,0 +1,20 @@
+.video-list-card-image{
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.fighter-name{
+    font-size: smaller;
+    color: white;
+}
+
+.fighter-name-container{
+    background-color: #0d418b82; 
+}
+/* 
+.tournament-name{
+    font-size: medium;
+    font-weight: 600;
+} */
