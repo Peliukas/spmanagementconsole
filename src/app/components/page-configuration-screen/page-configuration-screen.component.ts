@@ -22,7 +22,11 @@ export class PageConfigurationScreenComponent implements OnInit {
     action_button_2_label: "",
     action_button_2_url: "",
     title_color: "#000",
-    description_color: "#000"
+    description_color: "#000",
+    description_background_color: "#000",
+    banner_display_event_date: false,
+    banner_use_custom_subtitle: false,
+    banner_custom_subtitle: ""
   };
 
   constructor(private apiManager: ApiManagerService,
@@ -37,13 +41,16 @@ export class PageConfigurationScreenComponent implements OnInit {
     this.featuredTournament = this.tournamentList.find( tournament => {
       return tournament.id === tournamentid;
     });
+    this.allPageConfigurations.selected_featured_tournament_id = this.featuredTournament.id;
   }  
 
   getAllPageConfigurations(){
     this.apiManager.getAllPageConfigurations('homepage')
     .subscribe( res => {
-      for(let localConfig in this.allPageConfigurations){
-        this.allPageConfigurations[localConfig] = res[localConfig].paramvalue;
+      let paramnames = Object.keys(res);
+      console.log(res);
+      for(let paramname of paramnames){
+        this.allPageConfigurations[paramname] = res[paramname].paramvalue;
       }
       this.getFeaturedTournament();
     });
@@ -59,7 +66,7 @@ export class PageConfigurationScreenComponent implements OnInit {
   getTournamentList(){
     this.apiManager.getModelList("tournament")
     .subscribe( res => {
-      for(let tournament in res){
+      for(let tournament of res){
         this.tournamentList.push(res[tournament]);
       }
     });

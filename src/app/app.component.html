@@ -1,11 +1,9 @@
-<div class="w-100">
+<div class="w-100 navigation-bar-wrapper position-relative">
     <app-navigation-bar></app-navigation-bar>
 </div>
-<div class="page-body-container w-100">
-    <div class="container pt-5">
-      <div class="row">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
+<div class="page-body-container w-100 page-transition-container">
+  <div [@routerTransition]="prepareRoute(outlet)" >
+    <router-outlet #outlet="outlet"></router-outlet>
   </div>
+</div>
   

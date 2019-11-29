@@ -1,89 +1,108 @@
-<mat-card class="w-100">
-  <mat-card-title>
-    Page configuration
-  </mat-card-title>
-  <mat-card-content>
-    <mat-tab-group>
-      <mat-tab label="Banner management">
-          <div class="container">
-              <div class="row">
-                <div class="col-12 pb-1 pt-4">
-                  <div class="w-100 mb-3">
-                    <mat-form-field class="w-100" *ngIf="tournamentList.length > 0">
-                      <mat-select (selectionChange)="setFeaturedTournament($event.value)" value="{{this.allPageConfigurations['selected_featured_tournament_id'] ? this.allPageConfigurations['selected_featured_tournament_id'] : -1}}" placeholder="Select tournament">
-                        <mat-option *ngFor="let tournament of tournamentList" value="{{tournament.id}}">
-                          {{tournament.name}}
-                        </mat-option>
-                        <mat-option value="-1">
-                          None
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <div class="row">
-                      <div class="col-4">
-                          <mat-card>
-                            <mat-card-content>
-                                <div class="d-flex align-content-center justify-content-between">
-                                  <mat-checkbox class="mt-auto mb-auto" [checked]="allPageConfigurations.enable_action_button_1" (change)="allPageConfigurations.enable_action_button_1 = !allPageConfigurations.enable_action_button_1" >Action 1</mat-checkbox>
-                                  <mat-form-field>
-                                      <input type="text" [value]="allPageConfigurations.action_button_1_label" matInput placeholder="Button label" (keyup)="allPageConfigurations.action_button_1_label = $event.target.value">
-                                  </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field class="w-100">                                  
-                                        <input class="w-100"  placeholder="Button URL" (keyup)="allPageConfigurations.action_button_1_url = $event.target.value"   matInput/>
-                                    </mat-form-field>
-                                </div>
-                                <mat-divider></mat-divider>
-                                <div class="d-flex align-content-center justify-content-between mt-3">
-                                  <mat-checkbox class="mt-auto mb-auto" [checked]="allPageConfigurations.enable_action_button_2" (change)="allPageConfigurations.enable_action_button_2 = !allPageConfigurations.enable_action_button_2">Action 2</mat-checkbox>
-                                  <mat-form-field>
-                                    <input type="text" [value]="allPageConfigurations.action_button_2_label" matInput placeholder="Button label" (keyup)="allPageConfigurations.action_button_2_label = $event.target.value">
-                                  </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field class="w-100">                                  
-                                        <input class="w-100"  placeholder="Button URL" (keyup)="allPageConfigurations.action_button_2_url = $event.target.value" matInput/>
-                                    </mat-form-field>
-                                </div>
-                            </mat-card-content>
-                          </mat-card>
-                      </div>      
-                      <div class="col-4">
-                        <mat-card>
-                          <mat-card-content>
-                            <h6>Font Colors</h6>
-                            <div>
-                                <app-sp-color-picker [selectedColor]="allPageConfigurations.title_color" (colorChanged)="allPageConfigurations.title_color = $event" [inputPlaceholder]="'Title Color'"></app-sp-color-picker>
-                                <app-sp-color-picker [selectedColor]="allPageConfigurations.description_color" (colorChanged)="allPageConfigurations.description_color = $event" [inputPlaceholder]="'Description color'"></app-sp-color-picker>
+<div class="container page-body mt-3">
+  <div class="row">
+      <mat-card class="col-12">
+          <mat-card-title>
+            Page configuration
+          </mat-card-title>
+          <mat-card-content>
+            <mat-tab-group>
+              <mat-tab label="Banner management">
+                  <div class="container">
+                      <div class="row">
+                        <div class="col-12 pb-1 pt-4">
+                          <div class="w-100 mb-3">
+                            <mat-form-field class="w-100" *ngIf="tournamentList.length > 0">
+                              <mat-select (selectionChange)="setFeaturedTournament($event.value)" value="{{this.allPageConfigurations['selected_featured_tournament_id'] ? this.allPageConfigurations['selected_featured_tournament_id'] : -1}}" placeholder="Select tournament">
+                                <mat-option *ngFor="let tournament of tournamentList" value="{{tournament.id}}">
+                                  {{tournament.name}}
+                                </mat-option>
+                                <mat-option value="-1">
+                                  None
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <div class="w-100 mb-2">
+                                <app-featured-tournament [featuredTournament]="featuredTournament" [customConfig]="allPageConfigurations"></app-featured-tournament>
                             </div>
-                          </mat-card-content>
-                        </mat-card>
-                      </div>      
-                      <div class="col-4">
-                          <mat-card>
-                            <mat-card-content>
-                              <h6>Custom Options</h6>
-                              <div>
-                                <mat-checkbox [checked]="allPageConfigurations.banner_display_event_date">Display Event Date</mat-checkbox>
-                              </div>
-                            </mat-card-content>
-                          </mat-card>
-                      </div>      
-                    </div>  
+                            <div class="row">
+                              <div class="col-4">
+                                  <mat-card>
+                                    <mat-card-content>
+                                        <div>
+                                          <mat-checkbox class="mt-auto mb-auto" [checked]="allPageConfigurations.enable_action_button_1" (change)="allPageConfigurations.enable_action_button_1 = !allPageConfigurations.enable_action_button_1" >Enable Button</mat-checkbox>
+                                        </div>
+                                        <div>
+                                          <mat-form-field class="w-100">
+                                              <input type="text" [value]="allPageConfigurations.action_button_1_label" matInput placeholder="Button label" (keyup)="allPageConfigurations.action_button_1_label = $event.target.value">
+                                          </mat-form-field>
+                                        </div>
+                                        <div>
+                                            <mat-form-field class="w-100">                                  
+                                                <input placeholder="Button URL" (keyup)="allPageConfigurations.action_button_1_url = $event.target.value"   matInput/>
+                                            </mat-form-field>
+                                        </div>
+                                    </mat-card-content>
+                                  </mat-card>
+                                  <mat-card class="mt-2">
+                                    <mat-card-content>
+                                        <div>
+                                            <mat-checkbox class="mt-auto mb-auto" [checked]="allPageConfigurations.enable_action_button_2" (change)="allPageConfigurations.enable_action_button_2 = !allPageConfigurations.enable_action_button_2">Enable Button</mat-checkbox>
+                                          </div>
+                                          <div>
+                                            <mat-form-field class="w-100">
+                                              <input type="text" [value]="allPageConfigurations.action_button_2_label" matInput placeholder="Button label" (keyup)="allPageConfigurations.action_button_2_label = $event.target.value">
+                                            </mat-form-field>
+                                          </div>
+                                          <div>
+                                              <mat-form-field class="w-100">                                  
+                                                  <input class="w-100"  placeholder="Button URL" (keyup)="allPageConfigurations.action_button_2_url = $event.target.value" matInput/>
+                                              </mat-form-field>
+                                          </div>
+                                    </mat-card-content>
+                                  </mat-card>
+                              </div>      
+                              <div class="col-4">
+                                <mat-card>
+                                  <mat-card-content>
+                                    <h6>Font Colors</h6>
+                                    <div>
+                                        <app-sp-color-picker [selectedColor]="allPageConfigurations.title_color" (colorChanged)="allPageConfigurations.title_color = $event" [inputPlaceholder]="'Title Color'"></app-sp-color-picker>
+                                        <app-sp-color-picker [selectedColor]="allPageConfigurations.description_color" (colorChanged)="allPageConfigurations.description_color = $event" [inputPlaceholder]="'Description color'"></app-sp-color-picker>
+                                        <app-sp-color-picker [selectedColor]="allPageConfigurations.description_background_color" (colorChanged)="allPageConfigurations.description_background_color = $event" [inputPlaceholder]="'Description background color'"></app-sp-color-picker>
+                                    </div>
+                                  </mat-card-content>
+                                </mat-card>
+                              </div>      
+                              <div class="col-4">
+                                  <mat-card>
+                                    <mat-card-content>
+                                      <h6>Custom Options</h6>
+                                      <div>
+                                        <mat-checkbox [checked]="allPageConfigurations.banner_display_event_date">Display Event Date</mat-checkbox>
+                                      </div>
+                                      <div>
+                                        <mat-checkbox [checked]="allPageConfigurations.banner_use_custom_subtitle">Use Custom Subtitle</mat-checkbox>
+                                      </div>
+                                      <div>
+                                        <mat-form-field class="w-100">
+                                          <textarea [value]="allPageConfigurations.banner_custom_subtitle" matInput placeholder="Custom subtitle text" (keyup)="allPageConfigurations.banner_custom_subtitle = $event.target.value"></textarea>
+                                        </mat-form-field>
+                                      </div>
+                                    </mat-card-content>
+                                  </mat-card>
+                              </div>      
+                            </div>  
+                          </div>
+                          <button mat-raised-button class="float-right mt-1" (click)="saveFeaturedTournamentConfiguration()">Save Changes</button>
+                        </div>
+                      </div>
                   </div>
-                  <app-featured-tournament [featuredTournament]="featuredTournament" [customConfig]="allPageConfigurations"></app-featured-tournament>
-                  <button mat-raised-button class="float-right mt-1" (click)="saveFeaturedTournamentConfiguration()">Save Changes</button>
-                </div>
-                <div class="col-12">
-                  
-                </div>
-              </div>
-          </div>
-      </mat-tab>
-      <mat-tab label="Sponsor management">
-        <app-sponsor-management></app-sponsor-management>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card-content>
-</mat-card>
+              </mat-tab>
+              <mat-tab label="Sponsor management">
+                <app-sponsor-management></app-sponsor-management>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card-content>
+        </mat-card>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.user-stats-list li{
+    margin-top: 15px;
+    font-size: larger;
+    border-bottom: 1px solid lightgray;
+}
+
+.fighter-social-wrapper{
+    background: #1d75bd;
+    color: white;
+}
+
+.bio-container{
+    border-top: 1px solid lightgray;
+}

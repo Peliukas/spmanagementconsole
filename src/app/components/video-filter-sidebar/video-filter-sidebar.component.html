@@ -1,0 +1,140 @@
+<mat-card>
+  <mat-card-content>
+    <div class="w-100" [formGroup]="videoFilterFormGroup">
+      <div class="mb-2">
+        <mat-form-field class="w-100" >
+          <input formControlName="searchquery" (keyup)="triggerFilterOptionChange()" type="text" placeholder="Quick Search" matInput title="Enter club, fighter or tournament name" >
+          <i class="material-icons" matSuffix>search</i>
+        </mat-form-field>
+      </div>
+      <div class="mb-1">
+          <strong>Fight Clubs</strong>
+          <mat-divider></mat-divider>
+          <mat-form-field class="w-100">
+              <mat-label>Fight clubs</mat-label>
+              <mat-select formControlName="fightclubs" multiple (selectionChange)="triggerFilterOptionChange()">
+                <mat-option *ngFor="let fightclub of fightClubList" [value]="fightclub.id">{{fightclub.name}}</mat-option>
+              </mat-select>
+          </mat-form-field> 
+          <mat-form-field class="w-100">
+            <mat-label>Fight club countries</mat-label>
+            <mat-select formControlName="fightclubcountries" multiple>
+                <mat-option *ngFor="let country of countryList" [value]="country.id">{{country.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>   
+          <!-- <mat-accordion>
+              <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      Fight Clubs
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-form-field class="w-100">
+                    <mat-label>Fight clubs</mat-label>
+                    <mat-select formControlName="fightclubs" multiple (selectionChange)="triggerFilterOptionChange()">
+                      <mat-option *ngFor="let fightclub of fightClubList" [value]="fightclub.id">{{fightclub.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field> 
+                <mat-form-field class="w-100">
+                  <mat-label>Fight club countries</mat-label>
+                  <mat-select formControlName="fightclubcountries" multiple>
+                      <mat-option *ngFor="let country of countryList" [value]="country.id">{{country.name}}</mat-option>
+                  </mat-select>
+              </mat-form-field>           
+              </mat-expansion-panel>
+          </mat-accordion> -->
+      </div>
+      <div class="mb-1">
+        <strong>Fighters</strong>
+        <mat-divider></mat-divider>
+        <mat-form-field class="w-100">
+            <mat-label>Fighters</mat-label>
+            <mat-select formControlName="fighters" multiple>
+              <mat-option *ngFor="let fighter of fighterList" [value]="fighter.id">{{fighter.firstname}} {{fighter.lastname}}</mat-option>
+            </mat-select>
+        </mat-form-field>   
+        <mat-form-field class="w-100">
+            <mat-label>Weight classes</mat-label>
+            <mat-select formControlName="weightclasses" multiple>
+                <mat-option *ngFor="let weightclass of weightClassList" [value]="weightclass.id">{{weightclass.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>     
+        <mat-form-field class="w-100">
+            <mat-label>Fighter countries</mat-label>
+            <mat-select formControlName="fightercountries" multiple>
+                <mat-option *ngFor="let country of countryList" [value]="country.id">{{country.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>  
+          <!-- <mat-accordion>
+              <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      Fighters
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-form-field class="w-100">
+                    <mat-label>Fighters</mat-label>
+                    <mat-select formControlName="fighters" multiple>
+                      <mat-option *ngFor="let fighter of fighterList" [value]="fighter.id">{{fighter.firstname}} {{fighter.lastname}}</mat-option>
+                    </mat-select>
+                </mat-form-field>   
+                <mat-form-field class="w-100">
+                    <mat-label>Weight classes</mat-label>
+                    <mat-select formControlName="weightclasses" multiple>
+                        <mat-option *ngFor="let weightclass of weightClassList" [value]="weightclass.id">{{weightclass.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>     
+                <mat-form-field class="w-100">
+                    <mat-label>Fighter countries</mat-label>
+                    <mat-select formControlName="fightercountries" multiple>
+                        <mat-option *ngFor="let country of countryList" [value]="country.id">{{country.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>     
+              </mat-expansion-panel>
+          </mat-accordion> -->
+      </div>
+      <div class="mb-1">
+        <strong>Tournaments</strong>
+        <mat-divider></mat-divider>
+        <mat-form-field class="w-100">
+            <mat-label>Tournaments</mat-label>
+            <mat-select formControlName="tournaments" multiple>
+                <mat-option *ngFor="let tournament of tournamentList" [value]="tournament.id">{{tournament.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+          <!-- <mat-accordion>
+              <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      Tournaments
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-form-field class="w-100">
+                    <mat-label>Tournaments</mat-label>
+                    <mat-select formControlName="tournaments" multiple>
+                        <mat-option *ngFor="let tournament of tournamentList" [value]="tournament.id">{{tournament.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>   
+              </mat-expansion-panel>
+          </mat-accordion> -->
+      </div>
+  </div>
+  <!-- <mat-card class="h-100">
+    <mat-card-content [formGroup]="videoFilterFormGroup">
+        <strong>Video filter</strong>
+        <mat-form-field class="w-100">
+            <mat-label>Fighters</mat-label>
+            <mat-select formControlName="fighters" multiple>
+              <mat-option *ngFor="let fighter of fighterList" [value]="fighter.id">{{fighter.firstname}} {{fighter.lastname}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+            <mat-label>Weight Class</mat-label>
+            <mat-select formControlName="weightclasses" multiple>
+                <mat-option *ngFor="let weightclass of weightClassList" [value]="weightclass.id">{{weightclass.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card> -->
+  </mat-card-content>
+</mat-card>

@@ -8,13 +8,10 @@
           </div>
           <div class="col-7">
             <ul class="nav-menu d-flex">
-              <li [routerLink]="['/videos']">Videos</li>
-              <li [routerLink]="['/admin/list', 'fightclub']">Fightclubs</li>
-              <li [routerLink]="['/admin/list', 'fighter']">Fighters</li>
-              <li [routerLink]="['/admin/list', 'tournament']">Tournaments</li>
-              <li [routerLink]="'/admin/pageconfig'">
-                <strong>Page configuration</strong>
-              </li>
+              <li [routerLink]="['/videos']" [class.nav-item-selected]="selectedPage === 'videos'">Browse Fights</li>
+              <li [routerLink]="['/fighters']" [class.nav-item-selected]="selectedPage === 'fighters'">Fighters</li>
+              <li [routerLink]="['/tournaments']" [class.nav-item-selected]="selectedPage === 'tournaments'">Tournaments</li>
+              <li [routerLink]="['/fightclubs']" [class.nav-item-selected]="selectedPage === 'fightclubs'">Fight Clubs</li>
             </ul>
           </div>
           <div class="col-3 mt-3 d-flex justify-content-end p-0" *ngIf="loggedInUserName">
@@ -25,13 +22,13 @@
               <img id="user-profile-image" src="assets/images/user_image_placeholder.png" alt="user profile image">
             </div>
             <mat-menu #userMenu="matMenu">
-              <button mat-menu-item>
-                  <i class="material-icons">
-                      account_circle
-                  </i>
-                  <span>Edit Profile</span>
+              <button mat-menu-item  [routerLink]="['/admin/dashboard']" class="d-flex align-items-center">
+                <i class="material-icons">
+                    dashboard
+                </i>
+                  <span>Dashboard</span>
               </button>
-              <button mat-menu-item (click)="logout()">
+              <button mat-menu-item (click)="logout()" class="d-flex align-items-center">
                   <i class="material-icons">
                       lock
                   </i>

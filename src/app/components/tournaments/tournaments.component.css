@@ -1,0 +1,31 @@
+.tournament-list-item{
+    height: 150px;
+    overflow: hidden;
+}
+
+.tournament-list-item-image{
+    background-size: cover!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    height: 150px
+}
+
+.tournament-list-item-data-container{
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    border-bottom: solid 1px lightgrey;
+}
+
+.tournament-list-item-date{
+    background: #1d75bdcc;
+    color: white;
+    padding: 10px;
+}
+
+.tournament-list-item-date h4{
+    font-weight: 700;
+}
+
+.featured-tournament-container{
+    height: 40vh;
+}

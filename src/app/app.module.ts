@@ -18,12 +18,14 @@ import { MainUserMenuComponent } from './components/main-user-menu/main-user-men
 import { PageConfigurationScreenComponent } from './components/page-configuration-screen/page-configuration-screen.component';
 import { SharedComponentWrapperModule } from './modules/shared-component-wrapper/shared-component-wrapper.module'; 
 import { ImageCropperModule } from 'ng2-img-cropper'; 
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {MatCardModule, MatSelectModule, MatSnackBarModule, 
   MatTabsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
   MatButtonModule, MatListModule, MatIconModule, MatSlideToggleModule,
   MatDialogModule, MatProgressSpinnerModule, MatNativeDateModule, 
   MatDatepickerModule, MatExpansionModule, MatMenuModule} from '@angular/material';
 import { SlickModule } from 'ngx-slick';
+import { ScrollEventModule } from 'ngx-scroll-event';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -41,6 +43,16 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { BrowseFightsComponent } from './components/browse-fights/browse-fights.component';
 import { VideoListCardComponent } from './components/video-list-card/video-list-card.component';
+import { VideoFilterSidebarComponent } from './components/video-filter-sidebar/video-filter-sidebar.component';
+import { VideoPlayerWindowComponent } from './components/video-player-window/video-player-window.component';
+import { FightersComponent } from './components/fighters/fighters.component';
+import { FighterProfileComponent } from './components/fighter-profile/fighter-profile.component';
+import { FightclubsComponent } from './components/fightclubs/fightclubs.component';
+import { TournamentsComponent } from './components/tournaments/tournaments.component';
+import { TournamentProfileComponent } from './components/tournament-profile/tournament-profile.component';
+import { FightclubProfileComponent } from './components/fightclub-profile/fightclub-profile.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const appRoutes: Routes = [
   { 
@@ -66,6 +78,33 @@ const appRoutes: Routes = [
   { 
     path: 'videos',
     component: BrowseFightsComponent
+  },
+  { 
+    path: 'fighters',
+    component: FightersComponent,
+    data: {state: 'fighters'}
+  },
+  { 
+    path: 'fighters/:fighterid',
+    component: FighterProfileComponent
+  },
+  { 
+    path: 'fightclubs',
+    component: FightclubsComponent,
+    data: {state: 'fightclubs'}
+  },
+  { 
+    path: 'fightclubs/:fightclubid',
+    component: FightclubProfileComponent
+  },
+  { 
+    path: 'tournaments',
+    component: TournamentsComponent,
+    data: {state: 'tournaments'}
+  },
+  { 
+    path: 'tournaments/:tournamentid',
+    component: TournamentProfileComponent
   },
   { 
     path: '',
@@ -103,7 +142,15 @@ const appRoutes: Routes = [
     NavigationBarComponent,
     PageNotFoundComponent,
     BrowseFightsComponent,
-    VideoListCardComponent
+    VideoListCardComponent,
+    VideoFilterSidebarComponent,
+    VideoPlayerWindowComponent,
+    FightersComponent,
+    FighterProfileComponent,
+    FightclubsComponent,
+    TournamentsComponent,
+    TournamentProfileComponent,
+    FightclubProfileComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -113,12 +160,14 @@ const appRoutes: Routes = [
     MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule,ColorPickerModule, 
     MatIconModule, MatSnackBarModule, MatSelectModule, MatDialogModule, MatCheckboxModule,
     MatDatepickerModule, MatNativeDateModule, MatExpansionModule, MatSlideToggleModule, MatMenuModule,
-    ReactiveFormsModule, HttpClientModule, ImageCropperModule,
+    ReactiveFormsModule, HttpClientModule, ImageCropperModule, AngularFontAwesomeModule,
     NgScrollbarModule, NgxMaterialTimepickerModule, ImageUploadModule.forRoot(), 
-    BrowserModule.withServerTransition({ appId: 'serverApp' }), BrowserAnimationsModule, SlickModule.forRoot()
+    BrowserModule.withServerTransition({ appId: 'serverApp' }), BrowserAnimationsModule, SlickModule.forRoot(),
+    ScrollEventModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [ApiConfig],
   bootstrap: [AppComponent],
-  entryComponents: [UnassignedFighterListComponent, CreateFightComponent, ImageCropperWithUploadComponent],
+  entryComponents: [UnassignedFighterListComponent, CreateFightComponent, ImageCropperWithUploadComponent, VideoPlayerWindowComponent],
 })
 export class AppModule { }

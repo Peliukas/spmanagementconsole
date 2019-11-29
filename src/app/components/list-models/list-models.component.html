@@ -24,24 +24,28 @@
       </div>
       <ng-scrollbar>
         <mat-list role="list" class="m-2" dense>
-            <mat-list-item *ngFor="let model of modelList" class="m-1" [class.fightclub-card]="modelName === 'fightclub'">
-              <div class="w-100 fightclub-image-container" 
-              *ngIf="modelName === 'fightclub'" [routerLink]="['/admin/edit/' + modelName + '/' + model.id]">
-              <div class=" fightclub-image container" [ngStyle]="{'background':'url(' + apiManager.config.storageUrl + model.image + ')'}" >
-                <div class="row h-100">
-                  <div class="col-6 m-auto">
-                      <h3>
-                          {{model.name}}
-                      </h3>
-                  </div>
-                  <div class="col-6 fightclub-controls d-flex justify-content-end m-auto">
-                      <button mat-icon-button class="float-right" (click)="areYouSure(model.id)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
+            <mat-list-item *ngFor="let model of modelList" 
+              class="m-1" 
+              [class.fightclub-card]="modelName === 'fightclub'">
+              <div class="w-100 fightclub-image-container mat-elevation-z10 mt-2 mb-2" 
+                *ngIf="modelName === 'fightclub'">
+                <div class=" fightclub-image container " 
+                  [ngStyle]="{'background':'url(' + model.image + ')'}" >
+                  <div class="row h-100">
+                    <div class="col-6 m-auto">
+                        <h3 class="fightclub-name-label">
+                            {{model.name}}
+                        </h3>
+                    </div>
+                    <div class="col-6 fightclub-controls d-flex justify-content-end m-auto">
+                        <button mat-icon-button class="float-right delete-model-btn" (click)="areYouSure(model.id)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-                <div class="container mat-elevation-z10 fightclub-list-item-info p-4">
+                <div class="container fightclub-list-item-info p-4"
+                    [routerLink]="['/admin/edit/' + modelName + '/' + model.id]">
                   <div class="row">
                     <div class="col-3">
                       <div class="w-100 d-flex">
@@ -73,7 +77,7 @@
               <div class="container p-0" *ngIf="modelName === 'fighter'">
                   <div class="row">
                     <div class="col-2  m-auto">
-                      <img class="fighter-avatar-image" src="{{model.image ? apiManager.config.storageUrl + model.image : apiManager.config.profileImagePlaceholderUrl}}" alt="">
+                      <img class="fighter-avatar-image" src="{{model.image ? model.image : apiManager.config.profileImagePlaceholderUrl}}" alt="">
                     </div>
                     <div class="col-8 pt-2">
                         <div class="row">

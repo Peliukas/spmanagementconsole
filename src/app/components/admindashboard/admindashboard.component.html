@@ -1,0 +1,47 @@
+<mat-card class="w-100">
+    <mat-card-title class="text-center">Admin Dashboard</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content class="mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 dashboard-menu-item">
+                    <mat-card class="w-100" [routerLink]="['/admin/list', 'fightclub']">
+                        <mat-card-content class="d-flex align-items-center justify-content-center">
+                            <div class="">
+                                <h5>Fightclubs</h5>
+                                <strong>{{totals.fightclubs}} Records</strong>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-4 dashboard-menu-item">
+                    <mat-card class="w-100" [routerLink]="['/admin/list', 'fighter']">
+                        <mat-card-content class="d-flex align-items-center justify-content-center">
+                            <div>
+                                <h5>Fighters</h5>
+                                <strong>{{totals.fighters}} Records</strong>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-4 dashboard-menu-item">
+                    <mat-card class="w-100" [routerLink]="['/admin/list', 'tournament']">
+                        <mat-card-content class="d-flex align-items-center justify-content-center">
+                            <div>
+                                <h5>Tournaments</h5>
+                                <strong>{{totals.tournaments}} Records</strong>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-4 dashboard-menu-item">
+                    <mat-card class="w-100" [routerLink]="'/admin/pageconfig'">
+                        <mat-card-content class="d-flex align-items-center justify-content-center">
+                            <h5>Page Configuration</h5>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

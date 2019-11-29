@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiConfig } from 'src/app/api-config';
+import { Component, OnInit } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ImageCropperWithUploadComponent } from '../image-cropper-with-upload/image-cropper-with-upload.component';
 import { ApiManagerService } from 'src/app/services/api-manager.service';

@@ -15,15 +15,14 @@ export class ImageCropperWithUploadComponent implements OnInit {
   
 
   constructor(public dialogRef: MatDialogRef<ImageCropperWithUploadComponent>,
-              @Inject(MAT_DIALOG_DATA) public dialogdata: any) 
-            {
+              @Inject(MAT_DIALOG_DATA) public dialogdata: any){
       this.cropperSettings = new CropperSettings();
-      this.cropperSettings.width = 100;
-      this.cropperSettings.height = 100;
-      this.cropperSettings.croppedWidth =250;
-      this.cropperSettings.croppedHeight = 250;
-      this.cropperSettings.canvasWidth = 400;
-      this.cropperSettings.canvasHeight = 300;
+      this.cropperSettings.width = this.dialogdata.width ? this.dialogdata.width : 100;
+      this.cropperSettings.height = this.dialogdata.height ? this.dialogdata.height : 100;
+      this.cropperSettings.croppedWidth = this.dialogdata.croppedWidth ? this.dialogdata.croppedWidth : 250;
+      this.cropperSettings.croppedHeight = this.dialogdata.croppedHeight ? this.dialogdata.croppedHeight : 250;
+      this.cropperSettings.canvasWidth = this.dialogdata.canvasWidth ? this.dialogdata.canvasWidth : 400;
+      this.cropperSettings.canvasHeight = this.dialogdata.canvasHeight ? this.dialogdata.canvasHeight : 300;
       this.cropperSettings.noFileInput = true;
       this.data = {};
    }

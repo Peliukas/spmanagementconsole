@@ -1,23 +1,22 @@
-<mat-card>
+<mat-card class="mat-elevation-z0" (click)="showVideoPlayer()">
+  <img src="{{videoData.thumbnail}}" alt="{{videoData.title}}" (load)="imageLoaded = true" mat-card-image>
   <mat-card-content>
-    <div class="row" *ngIf="fightContestants.length > 0">
-      <div class="col-6" *ngFor="let fighter of fightContestants">
-        <div class="w-100 video-list-card-image align-items-end d-flex" [ngStyle]="{'background-image':'url(' + apiManager.config.storageUrl + fighter.image + ')'}">
-          <div class="w-100 text-center fighter-name-container">
-            <span class="fighter-name font-weight-bold">{{fighter.firstname}} {{fighter.lastname}}</span>
-          </div>
-        </div>
-      </div>
+    <div class="video-spinner-container" *ngIf="!imageLoaded">
+      <mat-spinner></mat-spinner>
     </div>
-    <!-- <h5 class="text-center">{{videoData.tournament.name}}</h5> -->
+    <div>
+      <strong class="video-title">{{videoData.title}}</strong>
+    </div>
   </mat-card-content>
-  <mat-card-footer>
-    <!-- <div class="container">
+  <!-- <mat-card-footer>
+    <div class="container">
       <div class="row">
-        <div class="col-12">
+        <mat-divider></mat-divider>
+        <div class="align-content-center col-12 d-flex pb-2 pt-2">
+          <i class="material-icons">notifications</i>
           <span class="tournament-name">{{videoData.tournament.name}}</span>
         </div>
       </div>
-    </div> -->
-  </mat-card-footer>
+    </div>
+  </mat-card-footer> -->
 </mat-card>

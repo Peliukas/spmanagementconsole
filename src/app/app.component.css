@@ -1,0 +1,11 @@
+.navigation-bar-wrapper{
+    z-index: 5;
+    min-height: 7vh;
+    background: white;
+}
+
+app-navigation-bar{
+    /* position: fixed; */
+    width: 100%;
+    background: white;
+}

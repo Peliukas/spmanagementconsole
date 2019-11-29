@@ -1,11 +1,14 @@
 
-<div *ngIf="featuredTournament" class="w-100 banner-config-image-container" [ngStyle]="{'background': 'url(' + storageUrl + featuredTournament.image + ')'}">
+<div *ngIf="featuredTournament" class="w-100 banner-config-image-container" [ngStyle]="{'background': 'url(' + featuredTournament.image + ')'}">
   <div class="h-100 banner-content d-flex justify-content-center align-content-center" *ngIf="allPageConfigurations">
     <div class="m-auto w-50">
-        <h4 class="text-center banner-title" [style.color]="allPageConfigurations.title_color">
+        <h2 class="text-center banner-title" [style.color]="allPageConfigurations.title_color">
           <strong>{{featuredTournament.name}}</strong>
-        </h4>
-        <p class="text-center" [style.color]="allPageConfigurations.description_color">{{featuredTournament.description}}</p>
+        </h2>
+        <p class="text-center featured-tournament-description-container" [ngStyle]="{'background-color': allPageConfigurations.description_background_color}" 
+                               [style.color]="allPageConfigurations.description_color">
+                               {{(featuredTournament.description.length > 6 ) ? (featuredTournament.description | slice:0:250) + '..' : (featuredTournament.description) }}
+        </p>
         <div class="banner-action-buttons d-flex justify-content-center">
            <button mat-raised-button class="m-1" *ngIf="allPageConfigurations.enable_action_button_1 == 1">
               <a href="{{allPageConfigurations.action_button_1_url !== '' ? allPageConfigurations.action_button_1_url : '#'}}">

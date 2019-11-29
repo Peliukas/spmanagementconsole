@@ -1,0 +1,49 @@
+mat-progress-spinner{
+    position: absolute!important;
+    left: 46%;
+    top: 30%;
+}
+
+.video-wrapper{
+    position: relative!important;
+}
+
+.contenter-box{
+    height: 60px;
+}
+
+.contender-red{
+    color: palevioletred;
+}
+
+.contender-blue{
+    color: lightblue;
+}
+
+.contender-image{
+    height: 70px;
+    width: 70px;
+    border-radius: 70px;
+    background: gray;
+    background-size: contain;
+    background-position: center;
+}
+
+ul{
+    list-style: none;
+}
+
+li{
+    font-size: larger;
+}
+
+.fighter-stats-text{
+    font-size: larger;
+}
+
+.fightclub-name{
+    text-decoration: underline;
+}
+
+
+

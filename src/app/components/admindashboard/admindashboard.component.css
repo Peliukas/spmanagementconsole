@@ -1,0 +1,10 @@
+.dashboard-menu-item{
+    margin-bottom: 20px;
+}
+.dashboard-menu-item h5{
+    font-weight: 700;
+}
+
+.dashboard-menu-item mat-card-content{
+    min-height: 160px;
+}

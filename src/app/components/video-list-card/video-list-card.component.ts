@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiManagerService } from 'src/app/services/api-manager.service';
+import { VideoPlayerWindowComponent } from '../video-player-window/video-player-window.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-video-list-card',
@@ -9,23 +10,20 @@ import { ApiManagerService } from 'src/app/services/api-manager.service';
 export class VideoListCardComponent implements OnInit {
 
   @Input() videoData: any;
-  fightContestants: any[] = [];
-
-  constructor(private apiManager: ApiManagerService) {}
+  imageLoaded: boolean = false;
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.prepareFighterValues();
   }
 
-  prepareFighterValues(){
-    for(let fighter of Object.keys(this.videoData.fighters)){
-      let fighterValues: any[] = Object.values(this.videoData.fighters);
-      for(let i = 0; i < fighterValues.length; i++){
-        if(fighterValues[i].id === fighter){
-          this.fightContestants.push(fighterValues[i]);
-        }
-      }
-    }
+  showVideoPlayer(){
+    const dialogRef = this.dialog.open(VideoPlayerWindowComponent, {
+      height: '90vh',
+      width: '80vw',
+      id: 'video-payer-window-content-container',
+      data: this.videoData
+    });
+
   }
 
 }

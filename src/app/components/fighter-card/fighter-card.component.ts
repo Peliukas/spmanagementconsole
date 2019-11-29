@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ApiManagerService } from 'src/app/services/api-manager.service';
 
 @Component({
   selector: 'app-fighter-card',
@@ -15,7 +14,7 @@ export class FighterCardComponent implements OnInit {
   @Input() fighter: any;
   @Output() fighterSelected: EventEmitter<any> = new EventEmitter();
 
-  constructor(private apiManager: ApiManagerService) { }
+  constructor() { }
 
   ngOnInit() {
   }

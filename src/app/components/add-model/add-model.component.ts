@@ -1,11 +1,11 @@
-import {Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiConfig } from 'src/app/api-config';
+import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ApiManagerService } from 'src/app/services/api-manager.service';
+import { ImageCropperWithUploadComponent } from '../image-cropper-with-upload/image-cropper-with-upload.component';
 
 @Component({
   selector: 'app-add-model',
@@ -15,11 +15,11 @@ import { ApiManagerService } from 'src/app/services/api-manager.service';
 @Injectable()
 export class AddModelComponent implements OnInit {
   
-
-  @ViewChild('fileInput') fileInput: ElementRef;
+  countryList: any[];
   modelName: string;
   modelData: any;
   modelId: any;
+  modelImage: any;
   profileImage: any;
   profileImageUrl: any;
   fightList: any[];
@@ -30,17 +30,24 @@ export class AddModelComponent implements OnInit {
     website: new FormControl(''),
     email: new FormControl(''),
     phone: new FormControl(''),
+    country: new FormControl(''),
     image: new FormControl('')
   });
   fighterFormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
+    nickname: new FormControl(''),
     weight: new FormControl(''),
     height: new FormControl(''),
     fightclubid: new FormControl(''),
     birthdate: new FormControl(''),
     gender: new FormControl(''),
-    image: new FormControl('')
+    country: new FormControl(''),
+    image: new FormControl(''),
+    bio: new FormControl(''),
+    facebookurl: new FormControl(''),
+    twitterurl: new FormControl(''),
+    instagramurl: new FormControl(''),
   });
   tournamentFormGroup = new FormGroup({
     name: new FormControl(''),
@@ -62,11 +69,13 @@ export class AddModelComponent implements OnInit {
   constructor(private apiManager: ApiManagerService, 
     private snackBar: MatSnackBar,
     private route: ActivatedRoute, 
+    private router: Router, 
     public dialog: MatDialog) { }
 
   ngOnInit() {  
     this.route.params.subscribe(params => {
       this.modelName = params['modelName'];
+      this.getCountryList();
       if(params['id']){
         this.modelId = params['id'];
         this.populateInputs(); 
@@ -90,18 +99,14 @@ export class AddModelComponent implements OnInit {
     switch(this.modelName){
       case "fightclub":
       case "fighter":
-        this.apiManager.addModel(this.modelName, controlName.getRawValue())
+        let requestData = controlName.getRawValue();
+        requestData.id = this.modelId;
+        requestData.image = this.modelImage;
+        this.apiManager.addModel(this.modelName, requestData)
         .subscribe(res => {
           if(res > 0){
-            if(this.profileImage){
-              this.modelId = res;
-              this.uploadImage()
-              .subscribe( uploadRes => {
-                this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
-              });
-            }else{
-              this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
-            }
+            this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
+            this.router.navigate(['/admin/edit/' + this.modelName + '/' + res]);
           }
         });
       break;
@@ -109,18 +114,12 @@ export class AddModelComponent implements OnInit {
       let tournamentData: any = controlName.getRawValue();
       tournamentData.tournament_fights = this.fightList;
       tournamentData.id = this.modelId;
+      tournamentData.image = this.modelImage;
       this.apiManager.addModel(this.modelName, tournamentData)
       .subscribe(res => {
         if(res > 0){
-          if(this.profileImage){
-            this.modelId = res;
-            this.uploadImage()
-            .subscribe( uploadRes => {
-              this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
-            });
-          }else{
-            this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
-          }
+          this.snackBar.open("Changes have been successfully saved", "OK", {duration: 2000});
+          this.router.navigate(['/admin/edit/' + this.modelName + '/' + res]);
         }
       });
       break;
@@ -134,23 +133,70 @@ export class AddModelComponent implements OnInit {
         delete this.modelData['id'];
         switch(this.modelName){
           case "fightclub":
-            this.profileImageUrl = this.apiManager.getStorageUrl() + this.modelData['image'];
-            this.modelData['image'] = '';
+            this.modelImage = this.modelData['image'];
             this.fightclubFormGroup.setValue(this.modelData);
           break;
           case "fighter":
-            this.profileImageUrl = this.apiManager.getStorageUrl() + this.modelData['image'];
-            this.modelData['image'] = '';
+            this.modelImage = this.modelData['image'];
             this.fighterFormGroup.setValue(this.modelData);
           break;
           case "tournament":
-            this.profileImageUrl = this.apiManager.getStorageUrl() + this.modelData['image'];
-            this.modelData['image'] = '';
-            this.modelData['starttime'] = ""; 
-            this.modelData['endtime'] = ""; 
+            this.modelImage = this.modelData['image'];
             this.tournamentFormGroup.setValue(this.modelData);
           break;
         }
+      });
+  }
+
+  openCropperDialog(){
+    let cropperSettings: any;
+    switch(this.modelName){
+      case "fightclub":
+      case "tournament":
+        cropperSettings = {
+          width: 600,
+          height: 270,
+          croppedWidth: 800,
+          croppedHeight: 350,
+          canvasWidth: 600,
+          canvasHeight: 270
+        };
+      break;
+      case "fighter":
+        cropperSettings = {
+          width: 250,
+          height: 250,
+          croppedWidth: 250,
+          croppedHeight: 250,
+          canvasWidth: 300,
+          canvasHeight: 300
+        };
+      break;
+    }
+    const dialogRef = this.dialog.open(ImageCropperWithUploadComponent, {
+      width: '700px',
+      data: cropperSettings
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.modelImage = result;
+      }
+    });
+  }
+
+  
+  getCountryList(){
+    this.apiManager.getModelList('country')
+      .subscribe(res => {
+        this.countryList = [];
+        for(let countryId of Object.keys(res)){
+          this.countryList.push(res[countryId]);
+        }
+        // switch(this.modelName){
+        //   case "fighter":
+        //     this.fighterFormGroup.country.setValue(this.countryList);
+        //   break;
+        // }
       });
   }
 
@@ -163,10 +209,5 @@ export class AddModelComponent implements OnInit {
     this.profileImageUrl = event.src;
   }
 
-  uploadImage() {
-    let input = new FormData();
-    input.append("image", this.profileImage);
-    return this.apiManager.uploadImage(this.modelName, this.modelId, input);
-  }
 
 }

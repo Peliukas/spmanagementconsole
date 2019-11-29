@@ -1,9 +1,29 @@
-<mat-card>
-  <mat-card-content>
-    <div class="row" *ngIf="videoList">
-      <div class="col-4" *ngFor="let video of videoList">
-        <app-video-list-card [videoData]="video"></app-video-list-card>
+<div class="container page-body" >
+  <div class="row">
+    <div class="col-3">
+      <div class="page-body">
+        <app-video-filter-sidebar (filterCriteriaChanged)="filterVideos($event)" class="h-100"></app-video-filter-sidebar>
       </div>
     </div>
-  </mat-card-content>
-</mat-card>
+    <div class="col-9 ">
+      <mat-card class="page-body">
+        <mat-card-subtitle *ngIf="filteredResults.length > 0" class="text-right">
+          Total results: {{filteredResults.length}} 
+        </mat-card-subtitle>
+        <hr>
+        <ng-scrollbar class="video-scroll">
+          <mat-card-content class="result-container pl-3 pr-3"> 
+            <div class="row">
+              <div class="col-3" *ngFor="let video of displayedResults">
+                <app-video-list-card [videoData]="video"></app-video-list-card>
+              </div>
+            </div>
+            <button mat-button class="w-100" (click)="addNextPage()">
+              MORE
+            </button>
+          </mat-card-content>
+        </ng-scrollbar>
+      </mat-card>
+    </div>
+  </div>
+</div>

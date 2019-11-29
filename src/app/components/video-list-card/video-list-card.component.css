@@ -7,14 +7,41 @@
 
 .fighter-name{
     font-size: smaller;
-    color: white;
+    /* color: white; */
 }
 
 .fighter-name-container{
     background-color: #0d418b82; 
 }
-/* 
-.tournament-name{
-    font-size: medium;
-    font-weight: 600;
+
+.mat-card-content{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.video-title{
+    font-size: 12px;
+}
+
+.video-title-wrapper{
+    line-height: 15px;
+}
+
+.video-spinner-container mat-spinner{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 15%;
+    left: 30%;
+}
+
+/* .tournament-name{
+    position: absolute;
+    bottom: 30px;
+    color: white;
+    background: #0000008c;
+    padding: 5px;
+    width: 100%;
+    font-weight: 700;
+    left: 0;
 } */

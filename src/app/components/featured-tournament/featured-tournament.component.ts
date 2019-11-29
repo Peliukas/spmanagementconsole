@@ -10,12 +10,10 @@ export class FeaturedTournamentComponent implements OnInit {
 
   @Input() featuredTournament: any;
   @Input() customConfig: any;
-  storageUrl: string;
-  allPageConfigurations: any = [];
+  allPageConfigurations: any;
   constructor(private apiManager: ApiManagerService) { }
 
   ngOnInit() {
-    this.storageUrl = this.apiManager.getStorageUrl();
     this.getAllPageConfigurations();
   }
 
@@ -24,13 +22,25 @@ export class FeaturedTournamentComponent implements OnInit {
     if(!this.customConfig){
       this.apiManager.getAllPageConfigurations("homepage")
       .subscribe( res => {
-        for(let c in res){
-          this.allPageConfigurations[c] = res[c].paramvalue;
+        this.allPageConfigurations = [];
+        let keys = Object.keys(res);
+        for(let key of keys){
+          this.allPageConfigurations[key] = res[key].paramvalue;
+        }
+        if(!this.featuredTournament && Object.keys(res).length > 0){
+          this.getFeaturedTournament();
         }
       });
     }else{
       this.allPageConfigurations = this.customConfig;
     }
+  }
+
+  getFeaturedTournament(){
+    this.apiManager.searchForModel('tournament', 'id', this.allPageConfigurations.selected_featured_tournament_id)
+      .subscribe( res => {
+        this.featuredTournament = res[Object.keys(res)[0]];
+      });
   }
 
 }

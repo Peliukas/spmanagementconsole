@@ -1,13 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+*{
+    outline: none!important;
+}
 
 body, html{
     height: 100%;
+    overflow: hidden;
 }
 
-app-page-configuration-screen, 
+app-page-configuration-screen, app-admindashboard,
+app-add-model,
+app-fighters, app-fighter-profile, app-tournaments,
 app-list-models, app-homepage, app-browse-fights{
     width: 100%!important;
+    padding-top: 20px;
 }
 
 app-login-page{
@@ -15,8 +24,21 @@ app-login-page{
 }
 
 .page-body-container{
-    min-height: 93vh;
-    background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+    position: relative;
+    height: 92vh;
+    overflow: auto;
+    /* background-image: url("https://www.transparenttextures.com/patterns/noisy-grid.png");
+    background-color: #414143c7; */
+}
+body::before{
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url(https://www.transparenttextures.com/patterns/noisy-grid.png);
+    background-color: #414143c7;
 }
 
 .text-green{
@@ -35,4 +57,16 @@ app-login-page{
 
 .no-result-text{
     color: darkgray;
+}
+
+#video-payer-window-content-container{
+    padding: 0!important;
+}
+
+.page-transition-container{
+
+}
+
+.scroll-card-content{
+    height: 83vh;
 }

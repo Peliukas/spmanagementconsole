@@ -4,51 +4,67 @@
   </mat-card-title>
   <mat-card-content>
       <div class="fightclub-form-field-container row" *ngIf="modelName === 'fightclub'" [formGroup]="fightclubFormGroup">
-        <div class="col-6">
-            <img class="w-100" alt="" src="{{profileImageUrl ? profileImageUrl : apiManager.config.fightclubImagePlaceholderUrl}}">
-            <image-upload (uploadFinished)="profileImageChanged($event)"
-                          [preview]="false"
-                          [max]="1"></image-upload>
+        <div class="col-12 pb-3">
+            <img class="w-100 fightclub-banner" alt="" (click)="openCropperDialog()" src="{{modelImage ? modelImage : apiManager.config.fightclubImagePlaceholderUrl}}">
         </div>
         <div class="col-6">
             <mat-form-field>
                 <input type="text" matInput placeholder="Name" formControlName="name">
-            </mat-form-field>
+            </mat-form-field>  
+        </div>
+        <div class="col-6">
             <mat-form-field>
               <input type="text" matInput placeholder="City" formControlName="city">
             </mat-form-field>
+        </div>
+        <div class="col-6">
             <mat-form-field>
               <input type="text" matInput placeholder="Address" formControlName="address">
             </mat-form-field>
-            <mat-form-field>
-                <input type="text" matInput placeholder="Website" formControlName="website">
-            </mat-form-field>
-            <mat-form-field>
-                <input type="text" matInput placeholder="Contact email" formControlName="email">
-              </mat-form-field>
-            <mat-form-field>
-                  <input type="text" matInput placeholder="Contact phone" formControlName="phone">
-            </mat-form-field>    
-            <div>
-              <button mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Create'}} {{modelName}}</button>
-            </div>
+        </div>
+        <div class="col-6">
+          <mat-form-field>
+              <input type="text" matInput placeholder="Website" formControlName="website">
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field>
+                <input type="text" matInput placeholder="Contact phone" formControlName="phone">
+          </mat-form-field>    
+        </div>
+        <div class="col-6">
+          <mat-form-field>
+              <input type="text" matInput placeholder="Contact email" formControlName="email">
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field>
+              <mat-select matInput placeholder="Country" formControlName="country">
+                <mat-option *ngFor="let country of countryList" [value]="country.id">
+                  {{country.name}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <button mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Create'}} {{modelName}}</button>
         </div>
         
       </div>
       <div class="fighter-form-field-container" *ngIf="modelName === 'fighter'" [formGroup]="fighterFormGroup">
         <div class="row">
-            <div class="col-4 mt-4">
-                <img class="w-100" alt="" src="{{profileImageUrl ? profileImageUrl : apiManager.config.profileImagePlaceholderUrl}}">
-                <image-upload (uploadFinished)="profileImageChanged($event)"
-                              [preview]="false"
-                              [max]="1"></image-upload>
+            <div class="col-5 mt-4">
+              <img class="w-100 fighter-image" alt="" (click)="openCropperDialog()" src="{{modelImage ? modelImage : apiManager.config.fightclubImagePlaceholderUrl}}">
             </div>
-            <div class="col-8">
+            <div class="col-7">
                 <mat-form-field>
                     <input type="text" matInput placeholder="First Name" formControlName="firstname">
                 </mat-form-field>
                 <mat-form-field>
                   <input type="text" matInput placeholder="Last Name" formControlName="lastname">
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Nickname" formControlName="nickname">
                 </mat-form-field>
                 <mat-form-field>
                   <input type="number" matInput placeholder="Weight" formControlName="weight">
@@ -64,7 +80,26 @@
                         <mat-option value="Male">Male</mat-option>
                         <mat-option value="Female">Female</mat-option>
                       </mat-select>
+                </mat-form-field> 
+                <mat-form-field>
+                    <mat-select matInput placeholder="Country" formControlName="country">
+                      <mat-option *ngFor="let country of countryList" [value]="country.name">
+                        {{country.name}}
+                      </mat-option>
+                    </mat-select>
                 </mat-form-field>
+                <mat-form-field>
+                  <textarea matInput cols="30"  formControlName="bio" placeholder="Bio" rows="10"></textarea>
+                  </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Facebook URL" formControlName="facebookurl">
+                  </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Instagram URL" formControlName="instagramurl">
+                  </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Twitter URL" formControlName="twitterurl">
+                  </mat-form-field>
                 <div>
                     <button class="float-right" mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Create'}} {{modelName}}</button>
                 </div>
@@ -73,12 +108,9 @@
       </div>
       <div class="tournament-form-field-container" *ngIf="modelName === 'tournament'" [formGroup]="tournamentFormGroup">
         <div class="row">
-            <div class="col-12 tournament-image-placeholder" [ngStyle]="{'background' : 'url(' + (profileImageUrl ? profileImageUrl : apiManager.config.tournamentImagePlaceholderUrl) + ')'}"></div>
-            <div class="col-12 mt-3 mb-3">
-                <image-upload (uploadFinished)="profileImageChanged($event)"
-                  [preview]="false"
-                  [max]="1"></image-upload>
-            </div>  
+            <div class="col-12 mt-4">
+                <img class="w-100 tournament-banner" alt="" (click)="openCropperDialog()" src="{{modelImage ? modelImage : apiManager.config.fightclubImagePlaceholderUrl}}">
+              </div>
             <mat-form-field class="col-12">
                 <input type="text" matInput placeholder="Tournament name" formControlName="name">
             </mat-form-field>
@@ -123,10 +155,10 @@
   </mat-card-content>
 </mat-card>
 <app-tournament-fight-manager *ngIf="modelName === 'tournament'" [tournamentId]="modelId" (fightListChanged)="updateFightList($event)"></app-tournament-fight-manager>
-<mat-card class="mt-2" *ngIf="modelName === 'fightclub'">
+<mat-card class="mt-2" *ngIf="modelName === 'fightclub' && modelId > 0">
   <mat-card-title>Club Members</mat-card-title>
   <mat-card-content>
-    <div class="col-12 mt-4" *ngIf="modelId">
+    <div class="col-12 mt-4">
       <app-club-members [clubId]="modelId"></app-club-members>
     </div>
   </mat-card-content>

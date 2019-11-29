@@ -12,7 +12,7 @@
       <div class="w-100 add-contestant-button d-flex justify-content-center"
           *ngIf="redContestant" 
           [class.mat-elevation-z10]="selectingRedContestant"
-          [ngStyle]="{'background-image': 'url(' + apiManager.config.storageUrl + redContestant.image + ')'}"
+          [ngStyle]="{'background-image': 'url(' + redContestant.image + ')'}"
           (click)="chooseContestant('red')">
         <div class="alert alert-danger mt-auto text-center w-100">
           <strong>
@@ -36,7 +36,7 @@
       <div class="w-100 add-contestant-button d-flex justify-content-center"
           [class.mat-elevation-z10]="selectingBlueContestant"
           *ngIf="blueContestant" 
-          [ngStyle]="{'background-image': 'url(' + apiManager.config.storageUrl + blueContestant.image + ')'}"
+          [ngStyle]="{'background-image': 'url(' + blueContestant.image + ')'}"
           (click)="chooseContestant('blue')">
         <div class="alert alert-info mt-auto text-center w-100">
             <strong>

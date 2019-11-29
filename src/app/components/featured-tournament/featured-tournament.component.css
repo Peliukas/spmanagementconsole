@@ -1,6 +1,6 @@
 .banner-config-image-container{
-    height: 600px;
-    background-size: contain!important;
+    height: 40vh;
+    background-size: cover!important;
     background-repeat: no-repeat!important;
     background-position: center!important;
 }
@@ -16,4 +16,9 @@
 
 .banner-title{
     font-family: 'Oxygen', sans-serif;
+}
+
+.featured-tournament-description-container{
+    border-radius: 5px;
+    padding: 15px;
 }

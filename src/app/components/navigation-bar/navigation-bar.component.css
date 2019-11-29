@@ -22,4 +22,29 @@
     font-weight: 300;
     font-size: smaller;
     text-transform: uppercase;
+    cursor: pointer;
+    width: 114px;
+    text-align: center;
+    position: relative;
 }
+
+.nav-item-selected{
+    font-weight: 500!important;
+}
+
+.nav-item-selected::after{
+    content: '';
+    width: 30%;
+    height: 2px;
+    background: #1d75bdb3;
+    position: absolute;
+    bottom: 0;
+    left: 35%;
+}
+
+.nav-menu li:hover{
+    font-weight: 400;
+    transition-property: font-weight;
+    transition-duration: 0.5s;
+}
+

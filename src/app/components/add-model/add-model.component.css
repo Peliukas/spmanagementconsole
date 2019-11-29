@@ -20,8 +20,16 @@ mat-card-title{
 }
 
 .tournament-image-placeholder{
-    height: 350px;
+    height: 270px;
     background-position: center!important;
     background-repeat: no-repeat!important;
     background-size: contain!important;
+}
+
+.fightclub-banner, .tournament-banner{
+    height: 270px;
+}
+
+.fighter-image{
+    height: 350px;
 }

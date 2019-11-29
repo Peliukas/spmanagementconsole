@@ -48,7 +48,7 @@ export class ApiManagerService {
   }
 
   getUnassignedFighters(){
-    return this.http.get(this.config.apiUrl + '/fighters/unassigned/');
+    return this.http.get(this.config.apiUrl + 'fighters/unassigned');
   }
   
   //FeaturedTournamentComponent
@@ -58,7 +58,7 @@ export class ApiManagerService {
 
   //TournamentFightManagerComponent
   getTournamentProgram(tournamentId: number){
-    return this.http.get(this.config.apiUrl + 'pageconfig/' + tournamentId);
+    return this.http.get(this.config.apiUrl + 'tournamentprogram/' + tournamentId);
   }
 
 
@@ -74,8 +74,20 @@ export class ApiManagerService {
     return this.http.post(this.config.apiUrl + "assign/fighters/" + clubId, {fighterlist: fighterList});
   }
 
-  getVideos(){
-    return this.http.get(this.config.apiUrl + 'videos');  
+  getVideos(query){
+    let querystring = '?';
+    let queryKeys = Object.keys(query);
+    for(let element of queryKeys){
+      if(query[element]){
+        querystring += element + "=" + query[element] + "&";
+      }
+    }
+    querystring = querystring.substring(0, querystring.length -1);
+    return this.http.get(this.config.apiUrl + 'videos' + querystring);
+  }
+
+  getFighterProfileData(fighterid: number){
+    return this.http.get(this.config.apiUrl + 'fighterprofile/' + fighterid);
   }
 
   //Common 
@@ -83,5 +95,9 @@ export class ApiManagerService {
     return this.config.storageUrl;
   }
 
+
+  getAllChannelVideos(){
+    return this.http.get(this.config.apiUrl + 'all/channelvideo');
+  }
 
 }
