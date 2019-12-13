@@ -17,8 +17,26 @@ export class FighterProfileComponent implements OnInit {
     lost: 0,
     draw: 0
   };
+
+  single: any[] = [];
+  view: any[] = [250, 250];
+
+  // options
+  gradient: boolean = true;
+  showLegend: boolean = true;
+  showLabels: boolean = true;
+  isDoughnut: boolean = false;
+  legendPosition: string = 'below';
+
+  colorScheme = {
+    domain: ['#ff4d4f', '#4dff60', '#9b9b9b']
+  };
+  
   constructor(private apiManager: ApiManagerService, 
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+                
+                // Object.assign(this, { single });
+               }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -31,7 +49,6 @@ export class FighterProfileComponent implements OnInit {
     this.apiManager.getFighterProfileData(this.fighterId)
       .subscribe(result => {
         this.fighterData = result;
-        console.log(result);
         this.getFightStats();
       });
   }
@@ -46,6 +63,9 @@ export class FighterProfileComponent implements OnInit {
         this.fightStats.draw += 1;
       }
     }
+    this.single.push({"name": "Win", "value": this.fightStats.won});
+    this.single.push({"name": "Lose", "value": this.fightStats.lost});
+    this.single.push({"name": "Draw", "value": this.fightStats.draw});
   }
 
 

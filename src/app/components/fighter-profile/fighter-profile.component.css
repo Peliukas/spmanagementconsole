@@ -4,11 +4,17 @@
     border-bottom: 1px solid lightgray;
 }
 
-.fighter-social-wrapper{
+/* .fighter-social-wrapper{
     background: #1d75bd;
     color: white;
-}
+} */
 
 .bio-container{
-    border-top: 1px solid lightgray;
+    font-size: smaller;
+}
+
+
+.fighter-nickname{
+    color: lightgray;
+    font-size: large;
 }

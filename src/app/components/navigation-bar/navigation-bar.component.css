@@ -8,7 +8,23 @@
 
 #user-profile-image{
     height: 30px;
+    border-radius: 24px;
+    box-shadow: 0px 2px 3px lightgrey;
     float: right;
+}
+
+.navigation-menu-username-container{
+    margin-top: -10px;
+    padding: 5px;
+}
+
+.navigation-settings-button i{
+    color: #1d75bd;
+}
+
+.navigation-menu-button{
+    color: #1d75bd;
+    font-size: 14px;
 }
 
 .nav-menu{

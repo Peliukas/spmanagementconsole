@@ -1,117 +1,110 @@
-<div class="container">
+<div class="container mt-3 mb-5">
   <div class="row">
-    <div class="col-4">
+    <div class="col-4 page-body">
       <mat-card>
         <mat-card-content *ngIf="fighterData">
           <img src="{{fighterData.image}}" alt="" width="100%">
         </mat-card-content>
-        <mat-card-footer class="pb-2" *ngIf="fighterData">
-          <hr>
-          <div class="row">
-            <div class="col-12 d-flex justify-content-around">
-              <div class="text-center">
-                <h5>{{fightStats.won}}</h5>
-                <strong>WON</strong>
-              </div>
-              <div class="text-center">
-                <h5>{{fightStats.lost}}</h5>
-                <strong>LOST</strong>
-              </div>
-              <div class="text-center">
-                <h5>{{fightStats.draw}}</h5>
-                <strong>DRAW</strong>
-              </div>
-            </div>
-          </div>
-        </mat-card-footer>
       </mat-card>
     </div>
-    <div class="col-8">
+    <div class="col-8 page-body">
       <mat-card>
         <div class="d-flex justify-content-between" *ngIf="fighterData">
           <div>
-            <mat-card-title class="text-uppercase">
-              {{fighterData.firstname}} {{fighterData.lastname}}
+            <mat-card-title class="text-uppercase font-bebas">
+              <span>{{fighterData.firstname}} {{fighterData.lastname}}</span><span class="fighter-nickname ml-2">({{fighterData.nickname}})</span>
+              <mat-divider></mat-divider>
             </mat-card-title>
-            <mat-card-subtitle>{{fighterData.nickname}}</mat-card-subtitle>
           </div>
-          <!-- <div>
-            {{fighterData.fightclub.name}}
-          </div> -->
         </div>
-        <mat-card-content *ngIf="fighterData">
-          <hr>
-          <div class="row mt-3">
-            <div class="col-7">
+        <mat-card-content class="pt-2" *ngIf="fighterData">
+          <div class="row">
+            <div class="col-6">
               <ul class="w-100 list-unstyled user-stats-list">
-                <li>
+                <li class="font-bebas">
                   <div class="d-flex justify-content-between">
                     <span>Age </span>
                     <strong>{{fighterData.birthdate | ageConverter}}</strong>
                   </div>
                 </li>
-                <li>
+                <li  class="font-bebas">
                   <div class="d-flex justify-content-between">
                     <span>Weight </span>
                     <strong>{{fighterData.weight}}</strong>
                   </div>
                 </li>
-                <li>
+                <li  class="font-bebas">
                   <div class="d-flex justify-content-between">
                     <span>Height </span>
                     <strong>{{fighterData.height}}</strong>
                   </div>
                 </li>
-                <li>
+                <li  class="font-bebas">
                   <div class="d-flex justify-content-between">
                     <span>Gender </span>
                     <strong>{{fighterData.gender}}</strong>
                   </div>
                 </li>
-                <li>
+                <li  class="font-bebas">
                   <div class="d-flex justify-content-between">
                     <span>Country </span>
                     <strong>{{fighterData.country}}</strong>
                   </div>
                 </li>
-                <li>
+                <li *ngIf="fighterData.fightclub"  class="font-bebas">
                   <div class="d-flex justify-content-between">
                     <span>Fight Club</span>
                     <strong>{{fighterData.fightclub.name}}</strong>
                   </div>
                 </li>
+                <li *ngIf="fighterData.bio" class="jumbotron pb-4 pt-4">
+                  <div class="bio-container">
+                    <span>{{fighterData.bio}}</span>
+                  </div>
+                </li>
+                <li class="border-0">
+                  <div class="d-flex justify-content-around fighter-social-wrapper">
+                    <div class="fighter-social-icon">
+                      <fa name="facebook-square" size="2x"></fa>
+                    </div>
+                    <div class="fighter-social-icon">
+                      <fa name="twitter-square" size="2x"></fa>
+                    </div>
+                    <div class="fighter-social-icon">
+                      <fa name="instagram" size="2x"></fa>
+                    </div>
+                  </div>
+                </li>
               </ul>
             </div>
-            <div class="col-5 mt-3">
-              <strong>Bio</strong>
-              <div class="bio-container">
-                <span>{{fighterData.bio}}</span>
-              </div>
+            <div class="col-6">
+                <div class="chart">
+                  <ngx-charts-pie-chart
+                    [scheme]="colorScheme"
+                    [view]="view"
+                    [legendTitle]="''"
+                    [results]="single"
+                    [legend]="showLegend"
+                    [legendPosition]="legendPosition"
+                    [doughnut]="isDoughnut">
+                  </ngx-charts-pie-chart>    
+                </div>
             </div>
           </div>
         </mat-card-content>
-        <mat-card-footer>
-          <div class="d-flex justify-content-around pb-2 pt-2 fighter-social-wrapper">
-            <div class="fighter-social-icon">
-              <fa name="facebook-square" size="2x"></fa>
-            </div>
-            <div class="fighter-social-icon">
-              <fa name="twitter-square" size="2x"></fa>
-            </div>
-            <div class="fighter-social-icon">
-              <fa name="instagram" size="2x"></fa>
-            </div>
-          </div>
-        </mat-card-footer>
       </mat-card>
     </div>
   </div>
-  <div class="row mt-3" *ngIf="fighterData && fighterData.relatedfights">
-    <div class="col-12">
-      <mat-card>
+  <div class="row mt-3 mb-5" *ngIf="fighterData && fighterData.relatedfights">
+    <div class="col-12 mb-5">
+      <mat-card class="page-body" >
+        <mat-card-title class="font-bebas">
+          Related Fights
+        <mat-divider></mat-divider>
+        </mat-card-title>
         <mat-card-content>
-          <div class="row">
-            <div class="col-3" *ngFor="let fight of fighterData.relatedfights">
+          <div class="row pt-2">
+            <div class="col-2" *ngFor="let fight of fighterData.relatedfights">
               <app-video-list-card [videoData]="fight.relatedvideo"></app-video-list-card>
             </div>
           </div>

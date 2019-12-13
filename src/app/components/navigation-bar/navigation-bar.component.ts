@@ -20,9 +20,10 @@ export class NavigationBarComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.loggedInUserName = localStorage.getItem('username');
+    this.loggedInUserName = localStorage.getItem('username').replace('"', '').replace('"', '');
     this.storageManager.changes
     .subscribe(changeSubject => {
+      console.log("subject changed ", changeSubject);
       if(changeSubject.key === 'username'){
         this.loggedInUserName = changeSubject.value;
       }

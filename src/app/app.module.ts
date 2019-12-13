@@ -22,7 +22,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {MatCardModule, MatSelectModule, MatSnackBarModule, 
   MatTabsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
   MatButtonModule, MatListModule, MatIconModule, MatSlideToggleModule,
-  MatDialogModule, MatProgressSpinnerModule, MatNativeDateModule, 
+  MatDialogModule, MatProgressSpinnerModule, MatNativeDateModule, MatBottomSheetModule,
   MatDatepickerModule, MatExpansionModule, MatMenuModule} from '@angular/material';
 import { SlickModule } from 'ngx-slick';
 import { ScrollEventModule } from 'ngx-scroll-event';
@@ -53,6 +53,8 @@ import { TournamentProfileComponent } from './components/tournament-profile/tour
 import { FightclubProfileComponent } from './components/fightclub-profile/fightclub-profile.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { SafePipe } from './pipes/safe.pipe';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const appRoutes: Routes = [
   { 
@@ -150,7 +152,8 @@ const appRoutes: Routes = [
     FightclubsComponent,
     TournamentsComponent,
     TournamentProfileComponent,
-    FightclubProfileComponent
+    FightclubProfileComponent,
+    SafePipe
   ],
   imports: [
     RouterModule.forRoot(
@@ -160,10 +163,10 @@ const appRoutes: Routes = [
     MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule,ColorPickerModule, 
     MatIconModule, MatSnackBarModule, MatSelectModule, MatDialogModule, MatCheckboxModule,
     MatDatepickerModule, MatNativeDateModule, MatExpansionModule, MatSlideToggleModule, MatMenuModule,
-    ReactiveFormsModule, HttpClientModule, ImageCropperModule, AngularFontAwesomeModule,
+    ReactiveFormsModule, HttpClientModule, ImageCropperModule, AngularFontAwesomeModule, MatBottomSheetModule,
     NgScrollbarModule, NgxMaterialTimepickerModule, ImageUploadModule.forRoot(), 
     BrowserModule.withServerTransition({ appId: 'serverApp' }), BrowserAnimationsModule, SlickModule.forRoot(),
-    ScrollEventModule,
+    ScrollEventModule, NgxChartsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [ApiConfig],

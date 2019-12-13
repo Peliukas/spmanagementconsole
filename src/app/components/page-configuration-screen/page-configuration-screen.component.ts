@@ -66,8 +66,9 @@ export class PageConfigurationScreenComponent implements OnInit {
   getTournamentList(){
     this.apiManager.getModelList("tournament")
     .subscribe( res => {
-      for(let tournament of res){
-        this.tournamentList.push(res[tournament]);
+      let tournamentidlist = Object.keys(res);
+      for(let tournamentid of tournamentidlist){
+        this.tournamentList.push(res[tournamentid]);
       }
     });
   }

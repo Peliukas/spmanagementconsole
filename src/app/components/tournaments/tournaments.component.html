@@ -2,13 +2,13 @@
 <div class="w-100 featured-tournament-container page-body">
   <app-featured-tournament ></app-featured-tournament>
 </div>
-<div class="container mt-4 mb-3 page-body">
+<div class="container mt-4 mb-5 page-body">
   <div class="row">
-    <mat-card class="w-100 ">
+    <mat-card class="w-100 mb-5">
       <mat-card-content class="w-100">
         <div class="container">
           <div class="row">
-            <div class="col-12 tournament-list-item mb-3" *ngFor="let tournament of tournamentList">
+            <div class="col-12 tournament-list-item mb-3" *ngFor="let tournament of tournamentList" [routerLink]="['/tournaments/' + tournament.id]" >
               <div class="row">
                 <div class="col-3 tournament-list-item-image d-flex justify-content-center align-items-center" [ngStyle]="{'background':'url(' + tournament.image + ')'}">
                     <div class="tournament-list-item-date text-center">
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-9 tournament-list-item-data-container">
-                  <h5>
+                  <h5 class="font-bebas">
                     {{tournament.name}}
                   </h5>
                   <span>

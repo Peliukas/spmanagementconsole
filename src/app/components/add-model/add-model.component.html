@@ -1,165 +1,169 @@
-<mat-card>
-  <mat-card-title>
-    <div>{{modelName}}</div>
-  </mat-card-title>
-  <mat-card-content>
-      <div class="fightclub-form-field-container row" *ngIf="modelName === 'fightclub'" [formGroup]="fightclubFormGroup">
-        <div class="col-12 pb-3">
-            <img class="w-100 fightclub-banner" alt="" (click)="openCropperDialog()" src="{{modelImage ? modelImage : apiManager.config.fightclubImagePlaceholderUrl}}">
-        </div>
-        <div class="col-6">
-            <mat-form-field>
-                <input type="text" matInput placeholder="Name" formControlName="name">
-            </mat-form-field>  
-        </div>
-        <div class="col-6">
-            <mat-form-field>
-              <input type="text" matInput placeholder="City" formControlName="city">
-            </mat-form-field>
-        </div>
-        <div class="col-6">
-            <mat-form-field>
-              <input type="text" matInput placeholder="Address" formControlName="address">
-            </mat-form-field>
-        </div>
-        <div class="col-6">
-          <mat-form-field>
-              <input type="text" matInput placeholder="Website" formControlName="website">
-          </mat-form-field>
-        </div>
-        <div class="col-6">
-          <mat-form-field>
-                <input type="text" matInput placeholder="Contact phone" formControlName="phone">
-          </mat-form-field>    
-        </div>
-        <div class="col-6">
-          <mat-form-field>
-              <input type="text" matInput placeholder="Contact email" formControlName="email">
-          </mat-form-field>
-        </div>
-        <div class="col-6">
-          <mat-form-field>
-              <mat-select matInput placeholder="Country" formControlName="country">
-                <mat-option *ngFor="let country of countryList" [value]="country.id">
-                  {{country.name}}
-                </mat-option>
-              </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <button mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Create'}} {{modelName}}</button>
-        </div>
-        
-      </div>
-      <div class="fighter-form-field-container" *ngIf="modelName === 'fighter'" [formGroup]="fighterFormGroup">
-        <div class="row">
-            <div class="col-5 mt-4">
-              <img class="w-100 fighter-image" alt="" (click)="openCropperDialog()" src="{{modelImage ? modelImage : apiManager.config.fightclubImagePlaceholderUrl}}">
-            </div>
-            <div class="col-7">
-                <mat-form-field>
-                    <input type="text" matInput placeholder="First Name" formControlName="firstname">
-                </mat-form-field>
-                <mat-form-field>
-                  <input type="text" matInput placeholder="Last Name" formControlName="lastname">
-                </mat-form-field>
-                <mat-form-field>
-                  <input type="text" matInput placeholder="Nickname" formControlName="nickname">
-                </mat-form-field>
-                <mat-form-field>
-                  <input type="number" matInput placeholder="Weight" formControlName="weight">
-                </mat-form-field>
-                <mat-form-field>
-                    <input type="number" matInput placeholder="Height" formControlName="height">
-                </mat-form-field>
-                <mat-form-field>
-                    <input type="date" matInput placeholder="Date of birth" formControlName="birthdate">
-                  </mat-form-field>
-                <mat-form-field>
-                      <mat-select placeholder="Gender" formControlName="gender">
-                        <mat-option value="Male">Male</mat-option>
-                        <mat-option value="Female">Female</mat-option>
-                      </mat-select>
-                </mat-form-field> 
-                <mat-form-field>
-                    <mat-select matInput placeholder="Country" formControlName="country">
-                      <mat-option *ngFor="let country of countryList" [value]="country.name">
-                        {{country.name}}
-                      </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field>
-                  <textarea matInput cols="30"  formControlName="bio" placeholder="Bio" rows="10"></textarea>
-                  </mat-form-field>
-                <mat-form-field>
-                    <input type="text" matInput placeholder="Facebook URL" formControlName="facebookurl">
-                  </mat-form-field>
-                <mat-form-field>
-                    <input type="text" matInput placeholder="Instagram URL" formControlName="instagramurl">
-                  </mat-form-field>
-                <mat-form-field>
-                    <input type="text" matInput placeholder="Twitter URL" formControlName="twitterurl">
-                  </mat-form-field>
-                <div>
-                    <button class="float-right" mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Create'}} {{modelName}}</button>
+<div class="container mb-5 mt-3 page-body">
+  <div class="row mb-5">
+      <mat-card class="col-12  page-body">
+          <mat-card-title>
+            <div>{{modelName}}</div>
+          </mat-card-title>
+          <mat-card-content>
+              <div class="fightclub-form-field-container row" *ngIf="modelName === 'fightclub'" [formGroup]="fightclubFormGroup">
+                <div class="col-12 pb-3">
+                    <img class="w-100 fightclub-banner" alt="" (click)="openCropperDialog()" src="{{modelImage ? modelImage : apiManager.config.fightclubImagePlaceholderUrl}}">
                 </div>
-            </div>
-        </div>
-      </div>
-      <div class="tournament-form-field-container" *ngIf="modelName === 'tournament'" [formGroup]="tournamentFormGroup">
-        <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Name" formControlName="name">
+                    </mat-form-field>  
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                      <input type="text" matInput placeholder="City" formControlName="city">
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                      <input type="text" matInput placeholder="Address" formControlName="address">
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field>
+                      <input type="text" matInput placeholder="Website" formControlName="website">
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field>
+                        <input type="text" matInput placeholder="Contact phone" formControlName="phone">
+                  </mat-form-field>    
+                </div>
+                <div class="col-6">
+                  <mat-form-field>
+                      <input type="text" matInput placeholder="Contact email" formControlName="email">
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field>
+                      <mat-select matInput placeholder="Country" formControlName="country">
+                        <mat-option *ngFor="let country of countryList" [value]="country.id">
+                          {{country.name}}
+                        </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-12">
+                  <button mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Create'}} {{modelName}}</button>
+                </div>
+                
+              </div>
+              <div class="fighter-form-field-container" *ngIf="modelName === 'fighter'" [formGroup]="fighterFormGroup">
+                <div class="row">
+                    <div class="col-5 mt-4">
+                      <img class="w-100 fighter-image" alt="" (click)="openCropperDialog()" src="{{modelImage ? modelImage : apiManager.config.fightclubImagePlaceholderUrl}}">
+                    </div>
+                    <div class="col-7">
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="First Name" formControlName="firstname">
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input type="text" matInput placeholder="Last Name" formControlName="lastname">
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input type="text" matInput placeholder="Nickname" formControlName="nickname">
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input type="number" matInput placeholder="Weight" formControlName="weight">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="number" matInput placeholder="Height" formControlName="height">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="date" matInput placeholder="Date of birth" formControlName="birthdate">
+                          </mat-form-field>
+                        <mat-form-field>
+                              <mat-select placeholder="Gender" formControlName="gender">
+                                <mat-option value="Male">Male</mat-option>
+                                <mat-option value="Female">Female</mat-option>
+                              </mat-select>
+                        </mat-form-field> 
+                        <mat-form-field>
+                            <mat-select matInput placeholder="Country" formControlName="country">
+                              <mat-option *ngFor="let country of countryList" [value]="country.id">
+                                {{country.name}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                          <textarea matInput cols="30"  formControlName="bio" placeholder="Bio" rows="10"></textarea>
+                          </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Facebook URL" formControlName="facebookurl">
+                          </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Instagram URL" formControlName="instagramurl">
+                          </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Twitter URL" formControlName="twitterurl">
+                          </mat-form-field>
+                        <div>
+                            <button class="float-right" mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Create'}} {{modelName}}</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="tournament-form-field-container" *ngIf="modelName === 'tournament'" [formGroup]="tournamentFormGroup">
+                <div class="row">
+                    <div class="col-12 mt-4">
+                        <img class="w-100 tournament-banner" alt="" (click)="openCropperDialog()" src="{{modelImage ? modelImage : apiManager.config.fightclubImagePlaceholderUrl}}">
+                      </div>
+                    <mat-form-field class="col-12">
+                        <input type="text" matInput placeholder="Tournament name" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field class="col-4">
+                      <input matInput [matDatepicker]="startdate" placeholder="Start date" formControlName="startdate">
+                      <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+                      <mat-datepicker #startdate></mat-datepicker>
+                    </mat-form-field>
+                    <div class="col-2">
+                      <mat-form-field class="w-100">
+                          <input matInput [ngxTimepicker]="startpicker" placeholder="Start time" [format]="24" formControlName="starttime">
+                          <mat-icon matSuffix>access_time</mat-icon>
+                      </mat-form-field>
+                      <ngx-material-timepicker #startpicker></ngx-material-timepicker>
+                    </div>
+                    <mat-form-field class="col-4">
+                      <input matInput [matDatepicker]="enddate" placeholder="End date" formControlName="enddate">
+                      <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+                      <mat-datepicker #enddate></mat-datepicker>
+                    </mat-form-field>
+                    <div class="col-2">
+                        <mat-form-field class="w-100">
+                            <input matInput [ngxTimepicker]="endpicker" placeholder="End time" [format]="24" formControlName="endtime">
+                            <mat-icon matSuffix>access_time</mat-icon>
+                        </mat-form-field>
+                        <ngx-material-timepicker #endpicker></ngx-material-timepicker>
+                      </div>
+                    <mat-form-field class="col-6">
+                        <input type="text" matInput placeholder="City" formControlName="city">
+                    </mat-form-field>
+                    <mat-form-field class="col-6">
+                        <input type="text" matInput placeholder="Address" formControlName="address">
+                    </mat-form-field>
+                    <mat-form-field class="col-12">
+                        <textarea matInput placeholder="Description" formControlName="description" rows="3"></textarea>
+                    </mat-form-field>
+                    <div class="col-12">
+                        <button class="float-right" mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Create'}} {{modelName}}</button>
+                    </div>
+                </div>
+              </div>
+          </mat-card-content>
+        </mat-card>
+        <app-tournament-fight-manager *ngIf="modelName === 'tournament'" [tournamentId]="modelId" (fightListChanged)="updateFightList($event)"></app-tournament-fight-manager>
+        <mat-card class="mt-2" *ngIf="modelName === 'fightclub' && modelId > 0">
+          <mat-card-title>Club Members</mat-card-title>
+          <mat-card-content>
             <div class="col-12 mt-4">
-                <img class="w-100 tournament-banner" alt="" (click)="openCropperDialog()" src="{{modelImage ? modelImage : apiManager.config.fightclubImagePlaceholderUrl}}">
-              </div>
-            <mat-form-field class="col-12">
-                <input type="text" matInput placeholder="Tournament name" formControlName="name">
-            </mat-form-field>
-            <mat-form-field class="col-4">
-              <input matInput [matDatepicker]="startdate" placeholder="Start date" formControlName="startdate">
-              <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
-              <mat-datepicker #startdate></mat-datepicker>
-            </mat-form-field>
-            <div class="col-2">
-              <mat-form-field class="w-100">
-                  <input matInput [ngxTimepicker]="startpicker" placeholder="Start time" [format]="24" formControlName="starttime">
-                  <mat-icon matSuffix>access_time</mat-icon>
-              </mat-form-field>
-              <ngx-material-timepicker #startpicker></ngx-material-timepicker>
+              <app-club-members [clubId]="modelId"></app-club-members>
             </div>
-            <mat-form-field class="col-4">
-              <input matInput [matDatepicker]="enddate" placeholder="End date" formControlName="enddate">
-              <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
-              <mat-datepicker #enddate></mat-datepicker>
-            </mat-form-field>
-            <div class="col-2">
-                <mat-form-field class="w-100">
-                    <input matInput [ngxTimepicker]="endpicker" placeholder="End time" [format]="24" formControlName="endtime">
-                    <mat-icon matSuffix>access_time</mat-icon>
-                </mat-form-field>
-                <ngx-material-timepicker #endpicker></ngx-material-timepicker>
-              </div>
-            <mat-form-field class="col-6">
-                <input type="text" matInput placeholder="City" formControlName="city">
-            </mat-form-field>
-            <mat-form-field class="col-6">
-                <input type="text" matInput placeholder="Address" formControlName="address">
-            </mat-form-field>
-            <mat-form-field class="col-12">
-                <textarea matInput placeholder="Description" formControlName="description" rows="3"></textarea>
-            </mat-form-field>
-            <div class="col-12">
-                <button class="float-right" mat-raised-button [color]="'primary'" (click)="addModel()">{{modelId ? 'Edit' : 'Create'}} {{modelName}}</button>
-            </div>
-        </div>
-      </div>
-  </mat-card-content>
-</mat-card>
-<app-tournament-fight-manager *ngIf="modelName === 'tournament'" [tournamentId]="modelId" (fightListChanged)="updateFightList($event)"></app-tournament-fight-manager>
-<mat-card class="mt-2" *ngIf="modelName === 'fightclub' && modelId > 0">
-  <mat-card-title>Club Members</mat-card-title>
-  <mat-card-content>
-    <div class="col-12 mt-4">
-      <app-club-members [clubId]="modelId"></app-club-members>
-    </div>
-  </mat-card-content>
-</mat-card>
+          </mat-card-content>
+        </mat-card>
+  </div>
+</div>

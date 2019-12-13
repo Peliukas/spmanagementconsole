@@ -100,4 +100,18 @@ export class ApiManagerService {
     return this.http.get(this.config.apiUrl + 'all/channelvideo');
   }
 
+  getVideoData(youtubevideoid: any){
+    return this.http.get(this.config.apiUrl + 'videodata/' + youtubevideoid);
+  }
+
+
+  convertToArray(response: any){
+    let responseKeys = Object.keys(response);
+    let convertedResponse = [];
+    for(let responseKey of responseKeys){
+      convertedResponse.push(response[responseKey]);
+    }
+    return convertedResponse;
+  }
+
 }

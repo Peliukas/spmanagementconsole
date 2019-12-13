@@ -1,0 +1,89 @@
+.tournament-profile-image{
+    height: 67vh;
+    background-size: contain!important;
+    background-position: center!important;
+    background-repeat: no-repeat!important;
+    position: relative;
+}
+
+.tournament-profile-image::before{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '';
+    z-index: -1;
+}
+
+.tournament-name{
+    width: min-content;
+    background: #1d74bd;
+    color: white;
+    padding: 5px 15px 5px 15px;
+}
+
+.tornament-date{
+    font-weight: bold;
+}
+
+.tournament-time{
+    color: gray;
+}
+
+.tournament-icon{
+    /* font-size: -webkit-xxx-large; */
+}
+
+.fighter-image-container{
+    height: 120px;
+    width: 100px;
+    background-size: cover!important;
+    background-position: center!important;
+    background-repeat: no-repeat!important;
+}
+
+.tournament-program-element{
+    display: grid;
+    grid-template-columns: 4fr 3fr 4fr;
+}
+
+.fighter-nickname{
+    color: lightgray;
+    font-size: large;
+}
+
+.fighter-stats-data, .fighter-stats-headers{
+    font-size: smaller;
+}
+
+.tournament-video-frame{
+    height: 70vh;
+}
+
+.fighter-stats-data{
+    font-weight: 700;
+}
+
+.win-label{
+    padding: 3px;
+    text-transform: uppercase;
+    background: #ff5b5b;
+    color: white;
+    letter-spacing: 1px;
+    border-radius: 3px;
+}
+
+.watch-fight-btn{
+    font-weight: bolder;
+}
+
+.tournament-profile-main-card-content{
+    min-height: 80vh;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.tournament-program-element-container{
+    max-height: 88vh;
+}

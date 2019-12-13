@@ -21,7 +21,7 @@ export class VideoListCardComponent implements OnInit {
       height: '90vh',
       width: '80vw',
       id: 'video-payer-window-content-container',
-      data: this.videoData
+      data: this.videoData.videoid
     });
 
   }

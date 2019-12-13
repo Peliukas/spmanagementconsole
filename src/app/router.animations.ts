@@ -4,7 +4,7 @@ export const routerTransition = trigger('routerTransition', [
   transition('* <=> *', [
       query(':enter, :leave', style({ position: 'inherit', width:'inherit' })
       , { optional: true }),
-      query('.page-body', style({ opacity: 0 })),
+      query('.page-body', style({ opacity: 0 }), {optional: true}),
       group([
         query(':enter', [
             style({ transform: 'translateX(100%)' }),

@@ -30,6 +30,7 @@ export class BrowseFightsComponent implements OnInit {
     if(searchQueryMatch.length > 0 ){
       this.filteredResults = searchQueryMatch;
     }
+    this.displayedResults = this.filteredResults;
     
   }
 

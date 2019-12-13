@@ -1,78 +1,39 @@
 <mat-progress-spinner *ngIf="!videoLoaded" mode="indeterminate"></mat-progress-spinner>
-<iframe [src]="baseVideoUrl"
-(load)="videoLoaded = true"
- width="100%" height="70%" frameborder="0" allowfullscreen></iframe>
- <mat-tab-group *ngIf="videoLoaded && videoData.relatedfighters" mat-stretch-tabs>
-   <mat-tab label="Fighters"> 
-     <div class="container">
-       <div class="row p-3 mt-2">
-         <div class="col-5">
-           <div class="contenter-box contender-blue d-flex justify-content-center align-items-center">
-             <div class="contender-header mr-3 text-right">
-               <h5>{{videoData.relatedfighters[0].firstname}} {{videoData.relatedfighters[0].lastname}}</h5>
-               <h6 class="fightclub-name">{{videoData.relatedfighters[0].fightclub.name}}</h6>
-            </div>
-            <div class="contender-image" [ngStyle]="{'background-image': 'url(' + videoData.relatedfighters[0].image + ')'}"></div>
-          </div>
-        </div>
-        <div class="col-2 d-flex">
-            <div class="text-right pr-4 fighter-stats-text">
-              <div>
-                 <strong> {{videoData.relatedfighters[0].height}}</strong>
-              </div>
-              <div>
-                  <strong>{{videoData.relatedfighters[0].weight}}</strong>
-              </div>
-              <div>
-                  <strong>{{videoData.relatedfighters[0].birthdate | ageConverter}}</strong>
-              </div>
-              <div>
-                  <strong>{{videoData.relatedfighters[0].country}}</strong>
-              </div>
-            </div>
-            <div class="contender-info">
-                <ul class="p-0 text-center">
-                  <li>Height</li>
-                  <li>Weight</li>
-                  <li>Age</li>
-                  <li>Country</li>
-                </ul>
-              </div>
-            <div class="pl-4 fighter-stats-text">
-                <div>
-                    <strong>{{videoData.relatedfighters[1].height}}</strong>
-                </div>
-                <div>
-                  <strong>{{videoData.relatedfighters[1].weight}}</strong>
-                </div>
-                <div>
-                    <strong>{{videoData.relatedfighters[1].birthdate | ageConverter}}</strong>
-                </div>
-                <div>
-                    <strong>{{videoData.relatedfighters[1].country}}</strong>
-                </div>
-            </div>
-          </div>
-        <div class="col-5">
-          <div class="contenter-box contender-red d-flex justify-content-center align-items-center">
-            <div class="contender-image" [ngStyle]="{'background-image': 'url(' + videoData.relatedfighters[1].image + ')'}"></div>
-            <div class="contender-header ml-3">
-              <h5>{{videoData.relatedfighters[1].firstname}} {{videoData.relatedfighters[1].lastname}}</h5>
-              <h6 class="fightclub-name">{{videoData.relatedfighters[1].fightclub.name}}</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <mat-divider></mat-divider>
-  </div>
-</mat-tab>
-<mat-tab label="Tournament"> 
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h4>{{videoData.tournament.name}}</h4>
-      </div>
+<div class="player-window-body h-100">
+    <div>
+      <iframe [src]="baseVideoUrl"
+      (load)="videoLoaded = true"
+        width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
     </div>
-  </div>
-</mat-tab>
-</mat-tab-group>
+     <div class="p-2 video-info-container">
+       <mat-card>
+         <mat-card-title class="font-bebas text-center">
+            Fight Contestants
+            <mat-divider></mat-divider>
+         </mat-card-title>
+         <mat-card-content class="pt-2">
+             <div class="contestant-card-top mat-elevation-z2 p-2 contestant-card position-relative">
+               <div class="contestant-image-container" [ngStyle]="{'background':'url(' + videoData.relatedfighters[0].image + ')'}"></div>
+               <div class="contestant-info font-bebas pl-2">
+                 <span class="win-label-top win-label" *ngIf="videoData.tournamentfight.winnerfighterid === videoData.relatedfighters[0].id">WIN</span>
+                 <h5 class="contestant-name">{{videoData.relatedfighters[0].firstname}} {{videoData.relatedfighters[0].lastname}}</h5>
+                 <span class="contestant-nickname">({{videoData.relatedfighters[0].nickname}})</span>
+               </div>
+             </div>
+             <div class="versus-divider text-center mt-2 mb-2">
+               <h4>
+                   VS
+               </h4>
+             </div>
+             <div class="contestant-card-bottom text-right mat-elevation-z2 p-2 contestant-card position-relative">
+               <span class="win-label-bottom font-bebas win-label" *ngIf="videoData.tournamentfight.winnerfighterid === videoData.relatedfighters[1].id">WIN</span>
+               <div class="contestant-info font-bebas pr-2">
+                 <h5 class="contestant-name">{{videoData.relatedfighters[1].firstname}} {{videoData.relatedfighters[1].lastname}}</h5>
+                 <span class="contestant-nickname">({{videoData.relatedfighters[1].nickname}})</span>
+               </div>
+               <div class="contestant-image-container" [ngStyle]="{'background':'url(' + videoData.relatedfighters[1].image + ')'}"></div>
+             </div>
+         </mat-card-content>
+       </mat-card>
+    </div>
+</div>

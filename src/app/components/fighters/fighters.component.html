@@ -1,15 +1,13 @@
-<div class="page-body w-100">
-  <mat-card class="w-100">
-    <mat-card-content class="scroll-card-content">
-      <ng-scrollbar>
-        <div class="container">
-          <div class="row" *ngIf="fighterList && fighterList.length > 0">
-            <div class="col-3 mb-4" *ngFor="let fighter of fighterList" [routerLink]="['/fighters/' + fighter.id]">
-              <app-fighter-card [fighter]="fighter" [selectable]="false"></app-fighter-card>
-            </div>
+<div class="page-body container mt-3 mb-5">
+  <div class="row">
+    <mat-card class="w-100">
+      <mat-card-content>
+        <div class="row" *ngIf="fighterList && fighterList.length > 0">
+          <div class="col-3 mb-4" *ngFor="let fighter of fighterList" [routerLink]="['/fighters/' + fighter.id]">
+            <app-fighter-card [fighter]="fighter" [selectable]="false"></app-fighter-card>
           </div>
         </div>
-      </ng-scrollbar>
-    </mat-card-content>
-  </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
